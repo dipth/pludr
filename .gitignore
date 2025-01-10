@@ -35,3 +35,6 @@
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+# Ignore Mac OS X DS_Store files.
+.DS_Store
