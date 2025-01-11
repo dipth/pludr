@@ -87,8 +87,7 @@ production:
   primary: &primary_production
     <<: *default
     database: pludr_production
-    username: pludr
-    password: <%= ENV["PLUDR_DATABASE_PASSWORD"] %>
+    url: <%= ENV["PLUDR_DATABASE_URL"] %>
   cache:
     <<: *primary_production
     database: pludr_production_cache
