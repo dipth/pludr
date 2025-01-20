@@ -1,0 +1,28 @@
+<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+  <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+      <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+        Sign in
+      </h1>
+
+      <%= form_with url: session_url, class: "space-y-4 md:space-y-6" do |f| %>
+        <div>
+          <%= f.label :email_address, class: "block mb-2 text-sm font-medium text-gray-900" %>
+          <%= f.email_field :email_address, required: true, autofocus: true, autocomplete: "username", value: params[:email_address], class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" %>
+        </div>
+
+        <div>
+          <%= f.label :password, class: "block mb-2 text-sm font-medium text-gray-900" %>
+          <%= f.password_field :password, required: true, autocomplete: "current-password", maxlength: 72, class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" %>
+        </div>
+
+        <%= f.submit "Sign in", class: "w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" %>
+
+        <p class="text-sm font-light text-gray-500">
+          Forgot password?
+          <%= link_to "Reset password here", new_password_path, class: "font-medium text-blue-600 hover:underline" %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
