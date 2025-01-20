@@ -7,12 +7,12 @@
 
       <%= form_with url: password_path(params[:token]), method: :put, class: "space-y-4 md:space-y-6" do |f| %>
         <div>
-          <%= f.label :password, class: "block mb-2 text-sm font-medium text-gray-900" %>
+          <%= f.label :password, "New password", class: "block mb-2 text-sm font-medium text-gray-900" %>
           <%= f.password_field :password, required: true, autofocus: true, autocomplete: "new-password", class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" %>
         </div>
 
         <div>
-          <%= f.label :password_confirmation, class: "block mb-2 text-sm font-medium text-gray-900" %>
+          <%= f.label :password_confirmation, "Confirm new password", class: "block mb-2 text-sm font-medium text-gray-900" %>
           <%= f.password_field :password_confirmation, required: true, autofocus: true, autocomplete: "new-password", class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" %>
         </div>
 
