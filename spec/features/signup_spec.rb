@@ -3,10 +3,12 @@
 require "rails_helper"
 
 RSpec.describe "Signup", type: :feature do
-  let(:username) { Faker::Internet.username }
-  let(:name) { Faker::Name.name }
-  let(:email_address) { Faker::Internet.email }
-  let(:password) { Faker::Internet.password }
+  let(:user) { build(:user) }
+
+  let(:username) { user.username }
+  let(:name) { user.name }
+  let(:email_address) { user.email_address }
+  let(:password) { user.password }
 
   it "allows a user to sign up from a link on the landing page" do
     visit root_path
