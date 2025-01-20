@@ -44,6 +44,9 @@ RSpec.configure do |config|
   # Add authentication helpers to the test suite for request and feature specs
   config.include SessionHelpers, type: :feature
 
+  # Add ActiveJob::TestHelper to the test suite
+  config.include ActiveJob::TestHelper
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -73,6 +76,13 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Use the :perform_enqueued_jobs tag to run jobs synchronously in tests
+  config.around(:each, :perform_enqueued_jobs) do |example|
+    perform_enqueued_jobs do
+      example.run
+    end
+  end
 end
 
 # Configure Shoulda Matchers
