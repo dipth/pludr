@@ -45,6 +45,9 @@ gem "thruster", require: false
 # Use inline_svg for SVG icons [https://github.com/jamesmartin/inline_svg]
 gem "inline_svg"
 
+# Use Postmark for sending emails [https://github.com/wildbit/postmark-rails]
+gem "postmark-rails"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
