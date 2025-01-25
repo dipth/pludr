@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
     if @user.save
       start_new_session_for @user
-      redirect_to root_path, notice: "Account created successfully!"
+      redirect_to root_path, notice: I18n.t("users.create.success_notice")
     else
       render :new, status: :unprocessable_entity
     end

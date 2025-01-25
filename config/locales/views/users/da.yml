@@ -1,0 +1,9 @@
+da:
+  users:
+    new:
+      title: "Opret bruger"
+      create_account: "Opret bruger"
+      already_have_account: "Har du allerede en bruger?"
+      sign_in_here: "Log ind her"
+    create:
+      success_notice: "Bruger oprettet."

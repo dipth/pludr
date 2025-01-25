@@ -1,0 +1,18 @@
+da:
+  passwords:
+    new:
+      title: "Nulstil adgangskode"
+      email_address_label: "Email adresse"
+      email_reset_instructions_button: "Send instruktioner til at nulstille adgangskode"
+    create:
+      success_notice: "Instruktioner til at nulstille adgangskode sendt (hvis brugeren med denne email-adresse eksisterer)."
+    update:
+      success_notice: "Adgangskode nulstillet."
+      error_alert: "Adgangskoderne stemte ikke overens."
+    shared:
+      invalid_token_alert: "Password reset link is invalid or has expired."
+    edit:
+      title: "Nulstil adgangskode"
+      password_label: "Ny adgangskode"
+      password_confirmation_label: "Gentag ny adgangskode"
+      save_button: "Gem"

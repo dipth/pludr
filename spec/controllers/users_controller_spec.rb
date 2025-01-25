@@ -15,7 +15,7 @@ RSpec.describe UsersController, type: :controller do
       it "creates a new user" do
         post :create, params: { user: user_params }
         expect(response).to redirect_to(root_path)
-        expect(flash[:notice]).to match(/Account created successfully!/)
+        expect(flash[:notice]).to eq(I18n.t("users.create.success_notice"))
         expect(User.find_by(email_address: "test@example.com")).to be_present
       end
     end

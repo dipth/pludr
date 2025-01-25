@@ -21,7 +21,7 @@ RSpec.describe PasswordsController, type: :controller do
       it "redirects to login with success message" do
         post :create, params: { email_address: user.email_address }
         expect(response).to redirect_to(new_session_path)
-        expect(flash[:notice]).to match(/Password reset instructions sent/)
+        expect(flash[:notice]).to eq(I18n.t("passwords.create.success_notice"))
       end
     end
 
@@ -29,7 +29,7 @@ RSpec.describe PasswordsController, type: :controller do
       it "redirects to login with same message for security" do
         post :create, params: { email_address: "nonexistent@example.com" }
         expect(response).to redirect_to(new_session_path)
-        expect(flash[:notice]).to match(/Password reset instructions sent/)
+        expect(flash[:notice]).to eq(I18n.t("passwords.create.success_notice"))
       end
 
       it "does not send any email" do
@@ -55,7 +55,7 @@ RSpec.describe PasswordsController, type: :controller do
       it "redirects to new password path" do
         get :edit, params: { token: "invalid_token" }
         expect(response).to redirect_to(new_password_path)
-        expect(flash[:alert]).to match(/Password reset link is invalid/)
+        expect(flash[:alert]).to eq(I18n.t("passwords.shared.invalid_token_alert"))
       end
     end
   end
@@ -77,7 +77,7 @@ RSpec.describe PasswordsController, type: :controller do
 
           expect(user.reload.authenticate(new_password)).to be_truthy
           expect(response).to redirect_to(new_session_path)
-          expect(flash[:notice]).to match(/Password has been reset/)
+          expect(flash[:notice]).to eq(I18n.t("passwords.update.success_notice"))
         end
 
         it "does not allow updating other attributes of the user" do
@@ -101,7 +101,7 @@ RSpec.describe PasswordsController, type: :controller do
           }
 
           expect(response).to redirect_to(edit_password_path(token))
-          expect(flash[:alert]).to match(/Passwords did not match/)
+          expect(flash[:alert]).to eq(I18n.t("passwords.update.error_alert"))
         end
       end
     end

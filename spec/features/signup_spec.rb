@@ -13,94 +13,94 @@ RSpec.describe "Signup", type: :feature do
   it "allows a user to sign up from a link on the landing page" do
     visit root_path
     click_link "Sign up"
-    expect(page).to have_text("Create an account")
-    fill_in "Username", with: username
-    fill_in "Name", with: name
-    fill_in "Email address", with: email_address
-    fill_in "Password", with: password
-    fill_in "Confirm password", with: password
-    click_button "Create account"
-    expect(page).to have_text("Account created successfully!")
+    expect(page).to have_text(I18n.t("users.new.title"))
+    fill_in :user_username, with: username
+    fill_in :user_name, with: name
+    fill_in :user_email_address, with: email_address
+    fill_in :user_password, with: password
+    fill_in :user_password_confirmation, with: password
+    click_button I18n.t("users.new.create_account")
+    expect(page).to have_text(I18n.t("users.create.success_notice"))
     expect(page).to have_text("Sign out")
   end
 
   it "shows an error when the username is blank" do
     visit new_user_path
-    fill_in "Name", with: name
-    fill_in "Email address", with: email_address
-    fill_in "Password", with: password
-    fill_in "Confirm password", with: password
-    click_button "Create account"
-    expect(page).to have_text("Username can't be blank")
+    fill_in :user_name, with: name
+    fill_in :user_email_address, with: email_address
+    fill_in :user_password, with: password
+    fill_in :user_password_confirmation, with: password
+    click_button I18n.t("users.new.create_account")
+    expect(page).to have_text(I18n.t("errors.messages.blank", attribute: User.human_attribute_name(:username)))
   end
 
   it "shows an error when the name is blank" do
     visit new_user_path
-    fill_in "Username", with: username
-    fill_in "Email address", with: email_address
-    fill_in "Password", with: password
-    fill_in "Confirm password", with: password
-    click_button "Create account"
-    expect(page).to have_text("Name can't be blank")
+    fill_in :user_username, with: username
+    fill_in :user_email_address, with: email_address
+    fill_in :user_password, with: password
+    fill_in :user_password_confirmation, with: password
+    click_button I18n.t("users.new.create_account")
+    expect(page).to have_text(I18n.t("errors.messages.blank", attribute: User.human_attribute_name(:name)))
   end
 
   it "shows an error when the email address is blank" do
     visit new_user_path
-    fill_in "Username", with: username
-    fill_in "Name", with: name
-    fill_in "Password", with: password
-    fill_in "Confirm password", with: password
-    click_button "Create account"
-    expect(page).to have_text("Email address can't be blank")
+    fill_in :user_username, with: username
+    fill_in :user_name, with: name
+    fill_in :user_password, with: password
+    fill_in :user_password_confirmation, with: password
+    click_button I18n.t("users.new.create_account")
+    expect(page).to have_text(I18n.t("errors.messages.blank", attribute: User.human_attribute_name(:email_address)))
   end
 
   it "shows an error when the password is blank" do
     visit new_user_path
-    fill_in "Username", with: username
-    fill_in "Name", with: name
-    fill_in "Email address", with: email_address
-    click_button "Create account"
-    expect(page).to have_text("Password can't be blank")
+    fill_in :user_username, with: username
+    fill_in :user_name, with: name
+    fill_in :user_email_address, with: email_address
+    click_button I18n.t("users.new.create_account")
+    expect(page).to have_text(I18n.t("errors.messages.blank", attribute: User.human_attribute_name(:password)))
   end
 
   it "shows an error when the password confirmation does not match the password" do
     visit new_user_path
-    fill_in "Username", with: username
-    fill_in "Name", with: name
-    fill_in "Email address", with: email_address
-    fill_in "Password", with: password
-    fill_in "Confirm password", with: "not-the-same-password"
-    click_button "Create account"
-    expect(page).to have_text("Password confirmation doesn't match Password")
+    fill_in :user_username, with: username
+    fill_in :user_name, with: name
+    fill_in :user_email_address, with: email_address
+    fill_in :user_password, with: password
+    fill_in :user_password_confirmation, with: "not-the-same-password"
+    click_button I18n.t("users.new.create_account")
+    expect(page).to have_text(I18n.t("errors.messages.confirmation", attribute: User.human_attribute_name(:password)))
   end
 
   it "does not allow a user to sign up with an existing email address" do
     create(:user, email_address: email_address)
     visit new_user_path
-    fill_in "Username", with: username
-    fill_in "Name", with: name
-    fill_in "Email address", with: email_address
-    fill_in "Password", with: password
-    fill_in "Confirm password", with: password
-    click_button "Create account"
-    expect(page).to have_text("Email address has already been taken")
+    fill_in :user_username, with: username
+    fill_in :user_name, with: name
+    fill_in :user_email_address, with: email_address
+    fill_in :user_password, with: password
+    fill_in :user_password_confirmation, with: password
+    click_button I18n.t("users.new.create_account")
+    expect(page).to have_text(I18n.t("errors.messages.taken", attribute: User.human_attribute_name(:email_address)))
   end
 
   it "does not allow a user to sign up with an existing username" do
     create(:user, username: username)
     visit new_user_path
-    fill_in "Username", with: username
-    fill_in "Name", with: name
-    fill_in "Email address", with: email_address
-    fill_in "Password", with: password
-    fill_in "Confirm password", with: password
-    click_button "Create account"
-    expect(page).to have_text("Username has already been taken")
+    fill_in :user_username, with: username
+    fill_in :user_name, with: name
+    fill_in :user_email_address, with: email_address
+    fill_in :user_password, with: password
+    fill_in :user_password_confirmation, with: password
+    click_button I18n.t("users.new.create_account")
+    expect(page).to have_text(I18n.t("errors.messages.taken", attribute: User.human_attribute_name(:username)))
   end
 
   it "has a working link to the sign in page" do
     visit new_user_path
-    click_link "Sign in here"
+    click_link I18n.t("users.new.sign_in_here")
     expect(page).to have_text("Sign in")
   end
 end

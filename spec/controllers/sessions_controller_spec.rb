@@ -19,7 +19,7 @@ RSpec.describe SessionsController, type: :controller do
           session[:return_to_after_authenticating] = "/path"
           post :create, params: valid_params
           expect(response).to redirect_to("/path")
-          expect(flash[:notice]).to eq("Signed in.")
+          expect(flash[:notice]).to eq(I18n.t("sessions.create.success_notice"))
         end
       end
 
@@ -27,7 +27,7 @@ RSpec.describe SessionsController, type: :controller do
         it "signs in the user and redirects to the root path" do
           post :create, params: valid_params
           expect(response).to redirect_to(root_path)
-          expect(flash[:notice]).to eq("Signed in.")
+          expect(flash[:notice]).to eq(I18n.t("sessions.create.success_notice"))
         end
       end
     end
@@ -36,7 +36,7 @@ RSpec.describe SessionsController, type: :controller do
       it "redirects back to sign in with an error" do
         post :create, params: invalid_params
         expect(response).to redirect_to(new_session_path)
-        expect(flash[:alert]).to eq("Try another email address or password.")
+        expect(flash[:alert]).to eq(I18n.t("sessions.create.error_alert"))
       end
     end
 
@@ -62,7 +62,7 @@ RSpec.describe SessionsController, type: :controller do
     it "signs out the user" do
       delete :destroy
       expect(response).to redirect_to(root_path)
-      expect(flash[:notice]).to eq("Signed out.")
+      expect(flash[:notice]).to eq(I18n.t("sessions.destroy.success_notice"))
     end
 
     it "clears the session cookie" do
