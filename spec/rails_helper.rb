@@ -83,6 +83,11 @@ RSpec.configure do |config|
       example.run
     end
   end
+
+  # Clear the cache before each test
+  config.before(:each) do
+    Rails.cache.clear
+  end
 end
 
 # Configure Shoulda Matchers
