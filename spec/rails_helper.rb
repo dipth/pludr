@@ -42,7 +42,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   # Add authentication helpers to the test suite for request and feature specs
-  config.include SessionHelpers, type: :feature
+  config.include SessionHelpers
 
   # Add ActiveJob::TestHelper to the test suite
   config.include ActiveJob::TestHelper
