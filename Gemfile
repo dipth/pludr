@@ -72,6 +72,9 @@ group :development, :test do
 
   # Use Capybara for testing [https://github.com/teamcapybara/capybara]
   gem "capybara"
+
+  # Use rails-controller-testing for testing controllers [https://github.com/rails/rails-controller-testing]
+  gem "rails-controller-testing"
 end
 
 group :development do
