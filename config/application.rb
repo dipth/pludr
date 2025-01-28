@@ -39,7 +39,7 @@ module Pludr
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    config.i18n.available_locales = %i[da]
+    config.i18n.available_locales = %i[da en]
     config.i18n.default_locale = :da
   end
 end
