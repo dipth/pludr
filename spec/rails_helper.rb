@@ -42,7 +42,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   # Add authentication helpers to the test suite for request and feature specs
-  config.include SessionHelpers, type: :feature
+  config.include SessionHelpers
 
   # Add ActiveJob::TestHelper to the test suite
   config.include ActiveJob::TestHelper
@@ -82,6 +82,11 @@ RSpec.configure do |config|
     perform_enqueued_jobs do
       example.run
     end
+  end
+
+  # Clear the cache before each test
+  config.before(:each) do
+    Rails.cache.clear
   end
 end
 

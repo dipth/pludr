@@ -1,0 +1,15 @@
+da:
+  activerecord:
+    attributes:
+      user:
+        username: "Brugernavn"
+        name: "Navn"
+        email_address: "E-mail adresse"
+        password: "Adgangskode"
+        password_confirmation: "Gentag adgangskode"
+    errors:
+      models:
+        user:
+          attributes:
+            username:
+              invalid: "kan kun indeholde bogstaver, tal, bindestreger og understreger"

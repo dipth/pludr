@@ -9,6 +9,6 @@ RSpec.describe "Sign out", type: :feature do
     sign_in_as user
     visit root_path
     click_link "Sign out"
-    expect(page).to have_text("Signed out")
+    expect(page).to have_text(I18n.t("sessions.destroy.success_notice"))
   end
 end

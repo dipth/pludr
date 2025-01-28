@@ -1,0 +1,7 @@
+da:
+  passwords_mailer:
+    reset:
+      subject: "Nulstil adgangskode"
+      body_html: "Du kan nulstille din adgangskode inden for de næste 15 minutter på"
+      body_text: "Du kan nulstille din adgangskode inden for de næste 15 minutter på denne side til nulstilling af adgangskode:"
+      password_reset_link: "denne side til nulstilling af adgangskode"
