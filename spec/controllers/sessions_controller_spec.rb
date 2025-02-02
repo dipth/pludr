@@ -32,6 +32,28 @@ RSpec.describe SessionsController, type: :controller do
       end
     end
 
+    context "with valid legacy credentials" do
+      let(:user) { create(:user, :with_legacy_password_1) }
+      let(:valid_params) { { email_address: user.email_address, password: "qwerty42" } }
+
+      context "when the after_authentication_url is set" do
+        it "signs in the user and redirects to the after_authentication_url" do
+          session[:return_to_after_authenticating] = "/path"
+          post :create, params: valid_params
+          expect(response).to redirect_to("/path")
+          expect(flash[:notice]).to eq(I18n.t("sessions.create.success_notice"))
+        end
+      end
+
+      context "when the after_authentication_url is not set" do
+        it "signs in the user and redirects to the root path" do
+          post :create, params: valid_params
+          expect(response).to redirect_to(root_path)
+          expect(flash[:notice]).to eq(I18n.t("sessions.create.success_notice"))
+        end
+      end
+    end
+
     context "with invalid credentials" do
       it "redirects back to sign in with an error" do
         post :create, params: invalid_params
