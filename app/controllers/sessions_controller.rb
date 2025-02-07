@@ -6,7 +6,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if user = User.authenticate_by(params.permit(:email_address, :password))
+    user = User.legacy_authenticate_by(email_address: params[:email_address], password: params[:password])
+    user ||= User.authenticate_by(params.permit(:email_address, :password))
+
+    if user
       start_new_session_for user
       redirect_to after_authentication_url, notice: I18n.t("sessions.create.success_notice")
     else

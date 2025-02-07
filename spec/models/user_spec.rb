@@ -35,4 +35,43 @@ RSpec.describe User, type: :model do
     it { should_not allow_value("thisusernameiswaaaaaaaaytoolong").for(:username) } # too long
     it { should_not allow_value("short").for(:password) } # too short
   end
+
+  describe "#legacy_authenticate_by" do
+    let(:email_address) { "user@example.com" }
+    let(:password) { "qwerty42" }
+
+    context "when a user with the given email address exists" do
+      context "when the user has a legacy password" do
+        context "when the password is correct" do
+          let!(:user) { create(:user, :with_legacy_password_1, email_address: email_address) }
+
+          it "returns the user" do
+            expect(User.legacy_authenticate_by(email_address: email_address, password: password)).to eq(user)
+          end
+        end
+
+        context "when the password is incorrect" do
+          let!(:user) { create(:user, :with_legacy_password_2, email_address: email_address) }
+
+          it "returns false" do
+            expect(User.legacy_authenticate_by(email_address: email_address, password: password)).to be_falsey
+          end
+        end
+      end
+
+      context "when the user does not have a legacy password" do
+        let!(:user) { create(:user, email_address: email_address) }
+
+        it "returns false" do
+          expect(User.legacy_authenticate_by(email_address: email_address, password: password)).to be_falsey
+        end
+      end
+    end
+
+    context "when a user with the given email address does not exist" do
+      it "returns false" do
+        expect(User.legacy_authenticate_by(email_address: email_address, password: password)).to be_falsey
+      end
+    end
+  end
 end
