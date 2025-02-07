@@ -38,6 +38,17 @@ RSpec.describe PasswordsController, type: :controller do
         }.not_to have_enqueued_mail(PasswordsMailer)
       end
     end
+
+    context "when rate limited" do
+      before do
+        11.times { post :create, params: { email_address: "foo@example.com" } }
+      end
+
+      it "redirects with rate limit message" do
+        expect(response).to redirect_to(new_password_url)
+        expect(flash[:alert]).to eq("Try again later.")
+      end
+    end
   end
 
   describe "GET #edit" do
