@@ -11,16 +11,16 @@ RSpec.describe "Sign in", type: :feature do
     visit root_path
     click_link "Sign in"
     expect(page).to have_text(I18n.t("sessions.new.title"))
-    fill_in :email_address, with: email_address
-    fill_in :password, with: password
+    fill_in I18n.t("activerecord.attributes.user.email_address"), with: email_address
+    fill_in I18n.t("activerecord.attributes.user.password"), with: password
     click_button I18n.t("sessions.new.sign_in")
     expect(page).to have_text(I18n.t("sessions.create.success_notice"))
   end
 
   it "shows an error when the email address or password is incorrect" do
     visit new_session_path
-    fill_in :email_address, with: email_address
-    fill_in :password, with: password
+    fill_in I18n.t("activerecord.attributes.user.email_address"), with: email_address
+    fill_in I18n.t("activerecord.attributes.user.password"), with: password
     click_button I18n.t("sessions.new.sign_in")
     expect(page).to have_text(I18n.t("sessions.create.error_alert"))
   end

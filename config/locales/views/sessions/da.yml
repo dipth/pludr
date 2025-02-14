@@ -5,8 +5,6 @@ da:
       sign_in: "Log ind"
       forgot_password: "Glemt adgangskode?"
       reset_password_here: "Nulstil adgangskode her"
-      email_address_label: "Email adresse"
-      password_label: "Adgangskode"
     create:
       success_notice: "Logget ind."
       error_alert: "Prøv en anden email-adresse eller adgangskode."

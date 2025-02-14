@@ -7,12 +7,12 @@
 
       <%= form_with url: session_url, class: "space-y-4 md:space-y-6" do |f| %>
         <div>
-          <%= f.label :email_address, t(".email_address_label"), class: "block mb-2 text-sm font-medium text-gray-900" %>
+          <%= f.label :email_address, t("activerecord.attributes.user.email_address"), class: "block mb-2 text-sm font-medium text-gray-900" %>
           <%= f.email_field :email_address, required: true, autofocus: true, autocomplete: "username", value: params[:email_address], class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" %>
         </div>
 
         <div>
-          <%= f.label :password, t(".password_label"), class: "block mb-2 text-sm font-medium text-gray-900" %>
+          <%= f.label :password, t("activerecord.attributes.user.password"), class: "block mb-2 text-sm font-medium text-gray-900" %>
           <%= f.password_field :password, required: true, autocomplete: "current-password", maxlength: 72, class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" %>
         </div>
 

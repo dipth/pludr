@@ -5,7 +5,7 @@
         <%= t(".title") %>
       </h1>
 
-      <%= form_with(model: @user, class: "space-y-4 md:space-y-6") do |f| %>
+      <%= form_with(model: @user, url: account_path, class: "space-y-4 md:space-y-6") do |f| %>
         <% if @user.errors.any? %>
           <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50">
             <ul class="list-disc pl-4">
@@ -33,20 +33,21 @@
 
         <div>
           <%= f.label :password, class: "block mb-2 text-sm font-medium text-gray-900" %>
-          <%= f.password_field :password, class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5", required: true %>
+          <%= f.password_field :password, class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" %>
+          <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+            <%= t(".password_hint") %>
+          </p>
         </div>
 
         <div>
           <%= f.label :password_confirmation, class: "block mb-2 text-sm font-medium text-gray-900" %>
-          <%= f.password_field :password_confirmation, class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5", required: true %>
+          <%= f.password_field :password_confirmation, class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" %>
+          <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+            <%= t(".password_confirmation_hint") %>
+          </p>
         </div>
 
-        <%= f.submit t(".create_account"), class: "w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" %>
-
-        <p class="text-sm font-light text-gray-500">
-          <%= t(".already_have_account") %>
-          <%= link_to t(".sign_in_here"), new_session_path, class: "font-medium text-blue-600 hover:underline" %>
-        </p>
+        <%= f.submit t(".update_account"), class: "w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" %>
       <% end %>
     </div>
   </div>
