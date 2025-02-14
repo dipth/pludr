@@ -1,0 +1,9 @@
+da:
+  accounts:
+    edit:
+      title: "Rediger konto"
+      password_hint: "Lad feltet være tomt hvis du ikke vil ændre dit kodeord"
+      password_confirmation_hint: "Lad feltet være tomt hvis du ikke vil ændre dit kodeord"
+      update_account: "Opdater konto"
+    update:
+      success_notice: "Konto opdateret."
