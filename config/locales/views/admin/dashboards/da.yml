@@ -1,0 +1,5 @@
+da:
+  admin:
+    dashboards:
+      index:
+        title: "Oversigt"

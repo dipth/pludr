@@ -51,6 +51,9 @@ gem "postmark-rails"
 # Use rails-i18n for internationalization [https://github.com/svenfuchs/rails-i18n]
 gem "rails-i18n", "~> 8.0.0"
 
+# Render icons using rails_icons [https://github.com/Rails-Designer/rails_icons]
+gem "rails_icons"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

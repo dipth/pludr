@@ -1,0 +1,8 @@
+da:
+  layouts:
+    admin:
+      nav:
+        open_sidebar: "Åbn sidebar"
+        toggle_dark_mode: "Mørk tilstand til/fra"
+        back_to_site: "Tilbage til Pludr"
+        sign_out: "Log ud"

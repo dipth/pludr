@@ -2,3 +2,4 @@ da:
   layouts:
     nav:
       edit_account: "Rediger konto"
+      admin: "Admin"
