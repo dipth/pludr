@@ -19,6 +19,11 @@
           <li>
             <%= link_to t(".edit_account"), edit_account_path, class: "block py-2 px-3 text-white rounded hover:bg-brand-dark md:hover:bg-transparent md:hover:text-gray-200 md:p-0" %>
           </li>
+          <% if Current.user.admin? %>
+            <li>
+              <%= link_to t(".admin"), admin_root_path, class: "block py-2 px-3 text-white rounded hover:bg-brand-dark md:hover:bg-transparent md:hover:text-gray-200 md:p-0" %>
+            </li>
+          <% end %>
         <% else %>
           <li>
             <%= link_to "Sign up", new_user_path, class: "block py-2 px-3 text-white rounded hover:bg-brand-dark md:hover:bg-transparent md:hover:text-gray-200 md:p-0" %>
