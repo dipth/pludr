@@ -34,6 +34,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Debug icons
+        run: ls -l app/assets/svg/icons/tabler/filled/home.svg || echo "File not found"
+
       - name: Run tests
         env:
           RAILS_ENV: test
