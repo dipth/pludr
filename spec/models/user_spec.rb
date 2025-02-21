@@ -74,4 +74,16 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe ".ransackable_attributes" do
+    it "returns the correct attributes" do
+      expect(User.ransackable_attributes).to eq(%w[username name email_address admin created_at updated_at])
+    end
+  end
+
+  describe ".ransortable_attributes" do
+    it "returns the correct attributes" do
+      expect(User.ransortable_attributes).to eq(%w[username name email_address admin created_at updated_at])
+    end
+  end
 end

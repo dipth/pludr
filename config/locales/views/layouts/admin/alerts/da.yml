@@ -1,0 +1,5 @@
+da:
+  layouts:
+    admin:
+      alerts:
+        close: "Luk"

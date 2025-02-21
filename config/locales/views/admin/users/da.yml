@@ -1,0 +1,27 @@
+da:
+  admin:
+    users:
+      index:
+        title: "Brugere"
+      filter:
+        title: "Filtrér"
+        created_at_gteq: "Oprettet efter"
+        created_at_lteq: "Oprettet før"
+      show:
+        general_information: "Generel information"
+        delete_confirmation: "Er du sikker på, at du vil slette brugeren?"
+        edit: "Rediger"
+        delete: "Slet"
+      recent_sessions:
+        title: "Seneste sessioner"
+      edit:
+        title: "Rediger bruger"
+      form:
+        save: "Gem ændringer"
+        password_hint: "Lad feltet være tomt hvis du ikke vil ændre brugerens kodeord"
+        password_confirmation_hint: "Lad feltet være tomt hvis du ikke vil ændre brugerens kodeord"
+      update:
+        success_notice: "Brugeren blev opdateret"
+      destroy:
+        success_notice: "Brugeren blev slettet"
+        cannot_delete_self: "Du kan ikke slette dig selv fra admin"

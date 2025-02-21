@@ -1,0 +1,48 @@
+<table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+  <thead class="bg-gray-100 dark:bg-gray-700">
+    <tr>
+      <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+        <%= sort_link(@q, :username, t("activerecord.attributes.user.username")) %>
+      </th>
+      <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+        <%= sort_link(@q, :name, t("activerecord.attributes.user.name")) %>
+      </th>
+      <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+        <%= sort_link(@q, :email_address, t("activerecord.attributes.user.email_address")) %>
+      </th>
+      <th scope="col" class="p-4 text-xs font-medium text-right text-gray-500 uppercase dark:text-gray-400">
+        <%= sort_link(@q, :admin, t("activerecord.attributes.user.admin")) %>
+      </th>
+      <th scope="col" class="p-4 text-xs font-medium text-right text-gray-500 uppercase dark:text-gray-400">
+        <%= sort_link(@q, :created_at, t("activerecord.attributes.user.created_at")) %>
+      </th>
+      <th scope="col" class="p-4 text-xs font-medium text-right text-gray-500 uppercase dark:text-gray-400">
+        <%= sort_link(@q, :updated_at, t("activerecord.attributes.user.updated_at")) %>
+      </th>
+    </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+    <% @users.each do |user| %>
+      <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= link_to user.username, admin_user_path(user), class: "hover:underline text-primary-600 dark:text-primary-500" %>
+        </td>
+        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= user.name %>
+        </td>
+        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= user.email_address %>
+        </td>
+        <td class="p-4 text-sm font-normal grid justify-items-end text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= boolean_with_icon(user.admin?) %>
+        </td>
+        <td class="p-4 text-sm font-normal text-right text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= l user.created_at, format: :short %>
+        </td>
+        <td class="p-4 text-sm font-normal text-right text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= l user.updated_at, format: :short %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

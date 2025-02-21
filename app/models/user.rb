@@ -37,4 +37,18 @@ class User < ApplicationRecord
 
     false
   end
+
+  # This method defines which attributes can be searched via Ransack.
+  # @param auth_object [Object] The object that is being authorized. Currently unused.
+  # @return [Array<String>] The attributes that can be searched.
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[username name email_address admin created_at updated_at]
+  end
+
+  # This method defines which attributes can be sorted via Ransack.
+  # @param auth_object [Object] The object that is being authorized. Currently unused.
+  # @return [Array<String>] The attributes that can be sorted.
+  def self.ransortable_attributes(_auth_object = nil)
+    %w[username name email_address admin created_at updated_at]
+  end
 end
