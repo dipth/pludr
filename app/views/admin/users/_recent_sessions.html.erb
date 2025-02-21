@@ -1,0 +1,51 @@
+<h1 class="p-4 text-2xl font-bold text-gray-900 dark:text-white"><%= t(".title") %></h1>
+<div class="flex flex-col">
+  <div class="overflow-x-auto">
+    <div class="inline-block min-w-full align-middle">
+      <div class="overflow-hidden shadow">
+        <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+          <thead class="bg-gray-100 dark:bg-gray-700">
+            <tr>
+              <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                <%= t("activerecord.attributes.session.id") %>
+              </th>
+              <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                <%= t("activerecord.attributes.session.ip_address") %>
+              </th>
+              <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                <%= t("activerecord.attributes.session.user_agent") %>
+              </th>
+              <th scope="col" class="p-4 text-xs font-medium text-right text-gray-500 uppercase dark:text-gray-400">
+                <%= t("activerecord.attributes.session.created_at") %>
+              </th>
+              <th scope="col" class="p-4 text-xs font-medium text-right text-gray-500 uppercase dark:text-gray-400">
+                <%= t("activerecord.attributes.session.updated_at") %>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+            <% @recent_sessions.each do |session| %>
+              <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="p-4 text-sm font-normal font-mono text-gray-500 whitespace-nowrap dark:text-gray-400">
+                  <%= session.id %>
+                </td>
+                <td class="p-4 text-sm font-normal font-mono whitespace-nowrap text-primary-600 dark:text-primary-500">
+                  <%= link_to session.ip_address, "https://ipinfo.io/#{session.ip_address}", target: "_blank", class: "hover:underline" %>
+                </td>
+                <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                  <%= session.user_agent %>
+                </td>
+                <td class="p-4 text-sm font-normal text-right text-gray-500 whitespace-nowrap dark:text-gray-400">
+                  <%= l session.created_at, format: :short %>
+                </td>
+                <td class="p-4 text-sm font-normal text-right text-gray-500 whitespace-nowrap dark:text-gray-400">
+                  <%= l session.updated_at, format: :short %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

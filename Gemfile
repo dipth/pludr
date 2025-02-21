@@ -54,6 +54,12 @@ gem "rails-i18n", "~> 8.0.0"
 # Render icons using rails_icons [https://github.com/Rails-Designer/rails_icons]
 gem "rails_icons"
 
+# Use pagy for pagination [https://github.com/ddnexus/pagy]
+gem "pagy"
+
+# Use ransack for searching [https://github.com/activerecord-hackery/ransack]
+gem "ransack"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

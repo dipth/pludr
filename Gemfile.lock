@@ -195,6 +195,7 @@ GEM
     nokogiri (1.18.3-x86_64-linux-musl)
       racc (~> 1.4)
     ostruct (0.6.1)
+    pagy (9.3.3)
     parallel (1.26.3)
     parser (3.3.6.0)
       ast (~> 2.4.1)
@@ -270,6 +271,10 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.2.1)
+    ransack (4.3.0)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     rdoc (6.12.0)
       psych (>= 4.0.0)
     regexp_parser (2.10.0)
@@ -413,6 +418,7 @@ DEPENDENCIES
   inline_svg
   jbuilder
   kamal
+  pagy
   pg (~> 1.1)
   postmark-rails
   propshaft
@@ -421,6 +427,7 @@ DEPENDENCIES
   rails-controller-testing
   rails-i18n (~> 8.0.0)
   rails_icons
+  ransack
   rspec-rails
   rubocop-rails-omakase
   shoulda-matchers

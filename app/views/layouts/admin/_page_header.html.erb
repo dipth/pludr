@@ -1,4 +1,4 @@
-<%# locals: (breadcrumbs:, title:) -%>
+<%# locals: (breadcrumbs:, title:, actions:[]) -%>
 
 <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="w-full mb-1">
@@ -27,7 +27,16 @@
                   </li>
                 </ol>
             </nav>
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white"><%= title %></h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white flex flex-wrap items-center justify-between">
+              <%= title %>
+              <% if actions.any? %>
+                <div class="flex items-center gap-2">
+                  <% actions.each do |action| %>
+                    <%= admin_action_button(action[:title], action[:url], method: action[:method], data: action[:data]) %>
+                  <% end %>
+                </div>
+              <% end %>
+            </h1>
         </div>
     </div>
 </div>
