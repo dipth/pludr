@@ -1,0 +1,9 @@
+da:
+  activerecord:
+    attributes:
+      session:
+        id: "ID"
+        ip_address: "IP-adresse"
+        user_agent: "Brugeragent"
+        created_at: "Oprettelsesdato"
+        updated_at: "Senest opdateret"

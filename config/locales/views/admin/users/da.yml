@@ -1,0 +1,16 @@
+da:
+  admin:
+    users:
+      index:
+        title: "Brugere"
+      filter:
+        title: "Filtrér"
+        created_at_gteq: "Oprettet efter"
+        created_at_lteq: "Oprettet før"
+      show:
+        general_information: "Generel information"
+        delete_confirmation: "Er du sikker på, at du vil slette brugeren?"
+        edit: "Rediger"
+        delete: "Slet"
+      recent_sessions:
+        title: "Seneste sessioner"
