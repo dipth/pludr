@@ -20,6 +20,24 @@ RSpec.describe Word, type: :model do
     it { should validate_presence_of(:value) }
     it { should validate_uniqueness_of(:value).case_insensitive }
     it { should validate_length_of(:value).is_at_least(4) }
+
+    describe "of the value format" do
+      it "does not allow numbers" do
+        expect(build(:word, value: "test123")).not_to be_valid
+      end
+
+      it "does not allow special characters" do
+        expect(build(:word, value: "test-_!@#")).not_to be_valid
+      end
+
+      it "does not allow characters with accents" do
+        expect(build(:word, value: "tést")).not_to be_valid
+      end
+
+      it "does allow the letters æ, ø and å" do
+        expect(build(:word, value: "testæøå")).to be_valid
+      end
+    end
   end
 
   describe ".ransackable_attributes" do

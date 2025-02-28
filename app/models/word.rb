@@ -4,7 +4,8 @@
 class Word < ApplicationRecord
   normalizes :value, with: ->(e) { e.strip.upcase }
 
-  validates :value, presence: true, uniqueness: true, length: { minimum: 4 }
+  validates :value, presence: true, uniqueness: true, length: { minimum: 4 },
+                    format: { with: /\A[a-zæøåÆØÅ]+\z/i }
 
   scope :active, -> { where(deleted_at: nil) }
   scope :deleted, -> { where.not(deleted_at: nil) }
