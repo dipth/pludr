@@ -2,11 +2,15 @@ da:
   activerecord:
     attributes:
       user:
+        id: "ID"
         username: "Brugernavn"
         name: "Navn"
         email_address: "E-mail adresse"
         password: "Adgangskode"
         password_confirmation: "Gentag adgangskode"
+        admin: "Administrator"
+        created_at: "Oprettelsesdato"
+        updated_at: "Senest opdateret"
     errors:
       models:
         user:
