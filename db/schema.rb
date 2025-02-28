@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_19_115102) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_28_112508) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_115102) do
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.citext "value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_words_on_deleted_at"
+    t.index ["value"], name: "index_words_on_value", unique: true
   end
 
   add_foreign_key "sessions", "users"
