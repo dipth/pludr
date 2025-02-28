@@ -1,0 +1,13 @@
+<%= render "layouts/admin/page_header",
+  breadcrumbs: [
+    { title: t("admin.words.index.title"), url: admin_words_path },
+    { title: @word.value, url: admin_word_path(@word) }
+  ],
+  title: t(".title")
+%>
+
+<div class="p-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+  <div class="max-w-lg">
+    <%= render "form" %>
+  </div>
+</div>

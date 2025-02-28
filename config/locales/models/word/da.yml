@@ -1,0 +1,17 @@
+da:
+  activerecord:
+    attributes:
+      word:
+        id: "ID"
+        value: "Ord"
+        created_at: "Oprettelsesdato"
+        updated_at: "Senest opdateret"
+        deleted_at: "Slettelsesdato"
+    errors:
+      models:
+        word:
+          attributes:
+            value:
+              taken: "er allerede taget"
+              too_short: "skal være mindst %{count} tegn"
+              invalid: "kan kun indeholde bogstaver"
