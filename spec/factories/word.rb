@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :word do
-    value { Faker::Lorem.word }
+    value { ('a'..'z').to_a.sample(rand(4..10)).join }
   end
 end

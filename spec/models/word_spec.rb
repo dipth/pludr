@@ -33,4 +33,39 @@ RSpec.describe Word, type: :model do
       expect(Word.ransortable_attributes).to eq(%w[value created_at updated_at deleted_at])
     end
   end
+
+  describe "#deleted?" do
+    it "returns true if the word has been deleted" do
+      word = create(:word, deleted_at: Time.current)
+      expect(word.deleted?).to be_truthy
+    end
+
+    it "returns false if the word has not been deleted" do
+      word = create(:word)
+      expect(word.deleted?).to be_falsey
+    end
+  end
+
+  describe "#delete!" do
+    it "soft-deletes the word by setting the deleted_at attribute to the current time" do
+      word = create(:word)
+      word.delete!
+      expect(word.reload.deleted_at).to be_within(3.seconds).of(Time.current)
+    end
+
+    it "does not touch the deleted_at attribute of already deleted words" do
+      deleted_at = 1.day.ago
+      word = create(:word, deleted_at: deleted_at)
+      word.delete!
+      expect(word.reload.deleted_at).to be_within(1.second).of(deleted_at)
+    end
+  end
+
+  describe "#restore!" do
+    it "restores the word by setting the deleted_at attribute to nil" do
+      word = create(:word, deleted_at: 1.day.ago)
+      word.restore!
+      expect(word.reload.deleted_at).to be_nil
+    end
+  end
 end

@@ -22,4 +22,22 @@ class Word < ApplicationRecord
   def self.ransortable_attributes(_auth_object = nil)
     %w[value created_at updated_at deleted_at]
   end
+
+  # This method checks if the word has been deleted.
+  # @return [Boolean] True if the word has been deleted, false otherwise.
+  def deleted?
+    deleted_at.present?
+  end
+
+  # This method deletes the word.
+  # @return [void]
+  def delete!
+    update(deleted_at: Time.current) unless deleted?
+  end
+
+  # This method restores the word.
+  # @return [void]
+  def restore!
+    update(deleted_at: nil) if deleted?
+  end
 end

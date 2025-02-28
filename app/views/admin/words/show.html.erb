@@ -1,0 +1,48 @@
+<%
+  actions = []
+  if @word.deleted?
+    actions << { title: t(".restore"), url: restore_admin_word_path(@word), method: :patch, data: { turbo_method: :patch, turbo_confirm: t(".restore_confirmation") } }
+  else
+    actions << { title: t(".edit"), url: edit_admin_word_path(@word) }
+    actions << { title: t(".delete"), url: admin_word_path(@word), method: :delete, data: { turbo_method: :delete, turbo_confirm: t(".delete_confirmation") } }
+  end
+%>
+<%= render "layouts/admin/page_header",
+  breadcrumbs: [{ title: t("admin.words.index.title"), url: admin_words_path }],
+  title: @word.value,
+  actions: actions
+%>
+
+<div class="p-4">
+  <h1 class="text-2xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700"><%= t(".general_information") %></h1>
+  <div class="flex flex-wrap gap-4 mt-4">
+    <dl class="w-sm md:w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+      <div class="flex flex-col pb-3">
+        <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400"><%= t("activerecord.attributes.word.id") %></dt>
+        <dd class="text-lg font-semibold font-mono"><%= @word.id %></dd>
+      </div>
+      <div class="flex flex-col py-3">
+        <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400"><%= t("activerecord.attributes.word.value") %></dt>
+        <dd class="text-lg font-semibold"><%= @word.value %></dd>
+      </div>
+      <div class="flex flex-col py-3">
+        <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400"><%= t("activerecord.attributes.word.created_at") %></dt>
+        <dd class="text-lg font-semibold"><%= l @word.created_at, format: :long %></dd>
+      </div>
+      <div class="flex flex-col py-3">
+        <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400"><%= t("activerecord.attributes.word.updated_at") %></dt>
+        <dd class="text-lg font-semibold"><%= l @word.updated_at, format: :long %></dd>
+      </div>
+      <div class="flex flex-col pt-3">
+        <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400"><%= t("activerecord.attributes.word.deleted_at") %></dt>
+        <dd class="text-lg font-semibold">
+          <% if @word.deleted_at.present? %>
+            <%= l @word.deleted_at, format: :long %>
+          <% else %>
+            <%= t(".not_deleted") %>
+          <% end %>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>

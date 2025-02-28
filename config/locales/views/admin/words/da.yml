@@ -1,0 +1,38 @@
+da:
+  admin:
+    words:
+      deleted_words_are_protected: "Du kan ikke redigere et slettet ord"
+      index:
+        title: "Ord"
+        new: "Opret nyt ord"
+      filter:
+        title: "Filtrér"
+        created_at_gteq: "Oprettet efter"
+        created_at_lteq: "Oprettet før"
+        deleted_at_null: "Slettet?"
+        active: "Ikke slettet"
+        deleted: "Slettet"
+      table:
+        not_deleted: "Ikke slettet"
+      show:
+        general_information: "Generel information"
+        delete_confirmation: "Er du sikker på, at du vil slette dette ord?"
+        restore_confirmation: "Er du sikker på, at du vil gendanne dette ord?"
+        edit: "Rediger"
+        delete: "Slet"
+        restore: "Gendan"
+        not_deleted: "Ikke slettet"
+      edit:
+        title: "Rediger ord"
+      new:
+        title: "Opret nyt ord"
+      form:
+        save: "Gem ændringer"
+      update:
+        success_notice: "Ordet blev opdateret"
+      create:
+        success_notice: "Ordet blev oprettet"
+      destroy:
+        success_notice: "Ordet blev slettet"
+      restore:
+        success_notice: "Ordet blev gendannet"
