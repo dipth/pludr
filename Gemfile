@@ -60,6 +60,13 @@ gem "pagy"
 # Use ransack for searching [https://github.com/activerecord-hackery/ransack]
 gem "ransack"
 
+# Use workflow for state machines [https://github.com/geekq/workflow]
+gem "workflow", "~> 3.1", ">= 3.1.1"
+gem "workflow-activerecord", "~> 6.0"
+
+# Use weighted_randomizer for weighted randomization [https://github.com/ryanlecompte/weighted_randomizer]
+gem "weighted_randomizer"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

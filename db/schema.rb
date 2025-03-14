@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_28_112508) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_14_095411) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "games", force: :cascade do |t|
+    t.string "workflow_state", null: false
+    t.string "letters", null: false
+    t.string "salt", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.index ["workflow_state"], name: "index_games_on_workflow_state"
+  end
 
   create_table "sessions", force: :cascade do |t|
     t.bigint "user_id", null: false

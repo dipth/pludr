@@ -1,0 +1,116 @@
+A:
+  value: 1
+  chance: 6
+  vowel: true
+B:
+  value: 4
+  chance: 3
+  vowel: false
+C:
+  value: 5
+  chance: 2
+  vowel: false
+D:
+  value: 1
+  chance: 6
+  vowel: false
+E:
+  value: 1
+  chance: 8
+  vowel: true
+F:
+  value: 3
+  chance: 4
+  vowel: false
+G:
+  value: 1
+  chance: 6
+  vowel: false
+H:
+  value: 3
+  chance: 4
+  vowel: false
+I:
+  value: 1
+  chance: 6
+  vowel: true
+J:
+  value: 5
+  chance: 2
+  vowel: false
+K:
+  value: 2
+  chance: 5
+  vowel: false
+L:
+  value: 1
+  chance: 6
+  vowel: false
+M:
+  value: 2
+  chance: 5
+  vowel: false
+N:
+  value: 1
+  chance: 6
+  vowel: false
+O:
+  value: 1
+  chance: 6
+  vowel: true
+P:
+  value: 4
+  chance: 3
+  vowel: false
+Q:
+  value: 6
+  chance: 1
+  vowel: false
+R:
+  value: 1
+  chance: 6
+  vowel: false
+S:
+  value: 1
+  chance: 6
+  vowel: false
+T:
+  value: 1
+  chance: 6
+  vowel: false
+U:
+  value: 4
+  chance: 3
+  vowel: true
+V:
+  value: 3
+  chance: 4
+  vowel: false
+W:
+  value: 6
+  chance: 1
+  vowel: false
+X:
+  value: 6
+  chance: 1
+  vowel: false
+Y:
+  value: 5
+  chance: 2
+  vowel: true
+Z:
+  value: 6
+  chance: 1
+  vowel: false
+Æ:
+  value: 5
+  chance: 2
+  vowel: true
+Ø:
+  value: 5
+  chance: 2
+  vowel: true
+Å:
+  value: 4
+  chance: 3
+  vowel: true
