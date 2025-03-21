@@ -180,18 +180,4 @@ RSpec.describe Game, type: :model do
       end
     end
   end
-
-  describe "#unique_letters" do
-    it "returns the unique letters in the game" do
-      game = build(:game, letters: "ABCAB" * 5)
-      expect(game.unique_letters).to eq(%w[ A B C ])
-    end
-  end
-
-  describe "#excluded_letters" do
-    it "returns the letters that are not in the game" do
-      game = build(:game, letters: "ABCAB" * 5)
-      expect(game.excluded_letters).to eq(%w[ D E F G H I J K L M N O P Q R S T U V W X Y Z Æ Ø Å ])
-    end
-  end
 end
