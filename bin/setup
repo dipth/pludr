@@ -20,6 +20,29 @@ FileUtils.chdir APP_ROOT do
   #   FileUtils.cp "config/database.yml.sample", "config/database.yml"
   # end
 
+  puts "\n== Creating databases =="
+  databases = %w[pludr_development pludr_test]
+
+  # We need to create the development and test databases manually because Rails does not support the icu locale
+  # that we need to set for the Danish locale.
+  databases.each do |database|
+    require "pg"
+    conn = PG.connect(
+      dbname: 'postgres',
+      user: ENV.fetch("DB_USERNAME") { "postgres" },
+      password: ENV.fetch("DB_PASSWORD") { "postgres" },
+      host: ENV.fetch("DB_HOST") { "localhost" },
+      port: ENV.fetch("DB_PORT") { 5432 }
+    )
+
+    begin
+      conn.exec("CREATE DATABASE #{database} LOCALE_PROVIDER = icu ICU_LOCALE = 'da-DK-x-icu' TEMPLATE = template0;")
+      puts "Created database '#{database}'"
+    rescue PG::DuplicateDatabase
+      puts "Database '#{database}' already exists"
+    end
+  end
+
   puts "\n== Preparing database =="
   system! "bin/rails db:prepare"
 
