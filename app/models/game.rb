@@ -77,6 +77,21 @@ class Game < ApplicationRecord
     LETTERS.keys - unique_letters
   end
 
+  # Retuns a list of potential words that should be checked for inclusion in the game.
+  # This is done by taking the entire dictionary of Words and filtering it in the following ways:
+  #  - Only include words that are minimum 4 characters long.
+  #  - Only include words that are maximum 25 characters long.
+  #  - Only include words where the value column does not contain any of the excluded letters.
+  # @return [Array<Word>] The potential words.
+  def potential_words
+    scope = Word.where("length(value) >= 4 AND length(value) <= 25")
+    excluded_letters.each do |letter|
+      scope = scope.where.not("value LIKE ?", "%#{letter}%")
+    end
+
+    scope
+  end
+
   private
 
   # Generates and sets a salt for the game if it is not already set.
