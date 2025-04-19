@@ -40,6 +40,13 @@ RSpec.describe Word, type: :model do
     end
   end
 
+  describe "#letter_pairs" do
+    it "sets letter_pairs to an array of letter pairs on creation" do
+      word = create(:word, value: "test")
+      expect(word.letter_pairs).to eq([ "TE", "ES", "ST" ])
+    end
+  end
+
   describe ".ransackable_attributes" do
     it "returns the correct attributes" do
       expect(Word.ransackable_attributes).to eq(%w[value created_at updated_at deleted_at])
@@ -49,6 +56,47 @@ RSpec.describe Word, type: :model do
   describe ".ransortable_attributes" do
     it "returns the correct attributes" do
       expect(Word.ransortable_attributes).to eq(%w[value created_at updated_at deleted_at])
+    end
+  end
+
+  describe ".active" do
+    it "returns words that have not been deleted" do
+      word = create(:word)
+      expect(Word.active).to eq([ word ])
+    end
+
+    it "does not return deleted words" do
+      create(:word, deleted_at: 1.minute.ago)
+      expect(Word.active).to eq([])
+    end
+  end
+
+  describe ".deleted" do
+    it "returns words that have been deleted" do
+      word = create(:word, deleted_at: 1.minute.ago)
+      expect(Word.deleted).to eq([ word ])
+    end
+
+    it "does not return words that have not been deleted" do
+      create(:word)
+      expect(Word.deleted).to eq([])
+    end
+  end
+
+  describe ".candidate_words" do
+    it "returns words that only contain letter pairs covered by the given array of letter pairs" do
+      word = create(:word, value: "test")
+      expect(Word.candidate_words(%w[ TE ES ST FO OO BA AR ])).to eq([ word ])
+    end
+
+    it "does not return words that contain letter pairs not covered by the given array of letter pairs" do
+      create(:word, value: "test")
+      expect(Word.candidate_words(%w[ FO OO BA AR ])).to eq([])
+    end
+
+    it "does not return words that are only partially covered by the given array of letter pairs" do
+      create(:word, value: "test")
+      expect(Word.candidate_words(%w[ TE ES FO OO BA AR ])).to eq([])
     end
   end
 
