@@ -51,7 +51,7 @@ class Word < ApplicationRecord
 
   private
 
-  # This methos sets the letter_pairs value of the word by taking the value and splitting it into all
+  # This method sets the letter_pairs value of the word by taking the value and splitting it into all
   # two letter combinations, for instance "HELLO" -> ["HE", "EL", "LL", "LO"]
   # @return [void]
   def set_letter_pairs
