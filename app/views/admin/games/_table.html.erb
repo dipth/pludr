@@ -1,0 +1,60 @@
+<table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+  <thead class="bg-gray-100 dark:bg-gray-700">
+    <tr>
+      <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+        <%= sort_link(@q, :id, t("activerecord.attributes.game.id")) %>
+      </th>
+      <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+        <%= sort_link(@q, :letters, t("activerecord.attributes.game.letters")) %>
+      </th>
+      <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+        <%= sort_link(@q, :game_words_count, t("activerecord.attributes.game.game_words_count")) %>
+      </th>
+      <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+        <%= sort_link(@q, :workflow_state, t("activerecord.attributes.game.workflow_state")) %>
+      </th>
+      <th scope="col" class="p-4 text-xs font-medium text-right text-gray-500 uppercase dark:text-gray-400">
+        <%= sort_link(@q, :created_at, t("activerecord.attributes.user.created_at")) %>
+      </th>
+      <th scope="col" class="p-4 text-xs font-medium text-right text-gray-500 uppercase dark:text-gray-400">
+        <%= sort_link(@q, :updated_at, t("activerecord.attributes.user.updated_at")) %>
+      </th>
+      <th scope="col" class="p-4 text-xs font-medium text-right text-gray-500 uppercase dark:text-gray-400">
+        <%= sort_link(@q, :started_at, t("activerecord.attributes.user.started_at")) %>
+      </th>
+      <th scope="col" class="p-4 text-xs font-medium text-right text-gray-500 uppercase dark:text-gray-400">
+        <%= sort_link(@q, :ended_at, t("activerecord.attributes.user.ended_at")) %>
+      </th>
+    </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+    <% @games.each do |game| %>
+      <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= link_to game.id, admin_game_path(game), class: "hover:underline text-primary-600 dark:text-primary-500" %>
+        </td>
+        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= game.letters %>
+        </td>
+        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= game.game_words_count %>
+        </td>
+        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= game_workflow_state_badge(game) %>
+        </td>
+        <td class="p-4 text-sm font-normal grid justify-items-end text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= l game.created_at, format: :short %>
+        </td>
+        <td class="p-4 text-sm font-normal text-right text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= l game.updated_at, format: :short %>
+        </td>
+        <td class="p-4 text-sm font-normal text-right text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= l game.started_at, format: :short if game.started_at.present? %>
+        </td>
+        <td class="p-4 text-sm font-normal text-right text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= l game.ended_at, format: :short if game.ended_at.present? %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,64 @@
+<div class="bg-white dark:bg-gray-800">
+  <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-none" data-inactive-classes="bg-none">
+    <h2 id="accordion-flush-heading-1">
+      <button type="button" class="flex p-4 items-center w-full font-medium rtl:text-right text-gray-500 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-1" aria-expanded="false" aria-controls="accordion-flush-body-1">
+        <%= icon "chevron-up", variant: "outline", class: "w-4 h-4 rotate-180 shrink-0", data: { accordion_icon: true } %>
+        <span><%= t('.title') %></span>
+      </button>
+    </h2>
+    <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
+      <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+        <%= search_form_for @q, url: admin_games_path, method: :get do |f| %>
+          <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div>
+              <%= f.label :id_cont, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.search_field :id_cont, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            </div>
+            <div>
+              <%= f.label :letters_cont, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.search_field :letters_cont, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            </div>
+            <div>
+              <%= f.label :workflow_state_cont, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.search_field :workflow_state_cont, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            </div>
+            <div>
+              <%= f.label :created_at_gteq, t('.created_at_gteq'), class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.datetime_field :created_at_gteq, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            </div>
+            <div>
+              <%= f.label :created_at_lteq, t('.created_at_lteq'), class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.datetime_field :created_at_lteq, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            </div>
+            <div>
+              <%= f.label :updated_at_gteq, t('.updated_at_gteq'), class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.datetime_field :updated_at_gteq, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            </div>
+            <div>
+              <%= f.label :updated_at_lteq, t('.updated_at_lteq'), class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.datetime_field :updated_at_lteq, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            </div>
+            <div>
+              <%= f.label :started_at_gteq, t('.started_at_gteq'), class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.datetime_field :started_at_gteq, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            </div>
+            <div>
+              <%= f.label :started_at_lteq, t('.started_at_lteq'), class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.datetime_field :started_at_lteq, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            </div>
+            <div>
+              <%= f.label :ended_at_gteq, t('.ended_at_gteq'), class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.datetime_field :ended_at_gteq, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            </div>
+            <div>
+              <%= f.label :ended_at_lteq, t('.ended_at_lteq'), class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+              <%= f.datetime_field :ended_at_lteq, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            </div>
+          </div>
+
+          <%= f.submit class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

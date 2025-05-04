@@ -1,0 +1,25 @@
+<%
+  actions = []
+  if @game.destroyable?
+    actions << { title: t(".delete"), url: admin_game_path(@game), method: :delete, data: { turbo_method: :delete, turbo_confirm: t(".delete_confirmation") } }
+  end
+%>
+<%= render "layouts/admin/page_header",
+  breadcrumbs: [{ title: t("admin.games.index.title"), url: admin_games_path }],
+  title: @game.id,
+  actions: actions
+%>
+
+<div class="p-4">
+  <div class="flex flex-wrap gap-4">
+    <div class="w-96 flex-shrink">
+      <%= render "admin/games/info" %>
+    </div>
+    <div class="w-96 flex-shrink">
+      <%= render "admin/games/letters" %>
+    </div>
+    <div class="w-96 flex-shrink">
+      <%= render "admin/games/words" %>
+    </div>
+  </div>
+</div>

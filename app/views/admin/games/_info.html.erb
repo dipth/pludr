@@ -1,0 +1,41 @@
+<div class="p-4">
+  <h1 class="text-2xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700">
+    <%= t(".general_information") %>
+  </h1>
+  <div class="flex flex-wrap gap-4 mt-4">
+    <dl class="w-sm md:w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+      <div class="flex flex-col pb-3">
+        <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400"><%= t("activerecord.attributes.game.workflow_state") %></dt>
+        <dd class="text-lg font-semibold font-mono"><%= game_workflow_state_badge(@game) %></dd>
+      </div>
+      <div class="flex flex-col pt-3 pb-3">
+        <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400"><%= t("activerecord.attributes.game.min_words") %></dt>
+        <dd class="text-lg font-semibold"><%= @game.min_words %></dd>
+      </div>
+      <div class="flex flex-col pt-3 pb-3">
+        <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400"><%= t("activerecord.attributes.game.max_words") %></dt>
+        <dd class="text-lg font-semibold"><%= @game.max_words %></dd>
+      </div>
+      <div class="flex flex-col pt-3 pb-3">
+        <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400"><%= t("activerecord.attributes.game.created_at") %></dt>
+        <dd class="text-lg font-semibold"><%= l @game.created_at, format: :long %></dd>
+      </div>
+      <div class="flex flex-col pt-3 pb-3">
+        <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400"><%= t("activerecord.attributes.game.updated_at") %></dt>
+        <dd class="text-lg font-semibold"><%= l @game.updated_at, format: :long %></dd>
+      </div>
+      <% if @game.started_at %>
+        <div class="flex flex-col pt-3 pb-3">
+          <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400"><%= t("activerecord.attributes.game.started_at") %></dt>
+          <dd class="text-lg font-semibold"><%= l @game.started_at, format: :long %></dd>
+        </div>
+      <% end %>
+      <% if @game.ended_at %>
+        <div class="flex flex-col pt-3 pb-3">
+          <dt class="mb-1 text-gray-500 md:text-lg dark:text-gray-400"><%= t("activerecord.attributes.game.ended_at") %></dt>
+          <dd class="text-lg font-semibold"><%= l @game.ended_at, format: :long %></dd>
+        </div>
+      <% end %>
+    </dl>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+  <thead class="bg-gray-100 dark:bg-gray-700">
+    <tr>
+      <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+        <%= t("activerecord.attributes.game_word.value") %>
+      </th>
+      <th scope="col" class="p-4 text-xs font-medium text-right text-gray-500 uppercase dark:text-gray-400">
+        <%= t("activerecord.attributes.game_word.length") %>
+      </th>
+      <th scope="col" class="p-4 text-xs font-medium text-right text-gray-500 uppercase dark:text-gray-400">
+        <%= t("activerecord.attributes.game_word.score") %>
+      </th>
+    </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+    <% @game.game_words.order(value: :asc).each do |game_word| %>
+      <tr class="hover:bg-gray-50 dark:hover:bg-gray-600">
+        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= game_word.value %>
+        </td>
+        <td class="p-4 text-sm font-normal text-right text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= game_word.length %>
+        </td>
+        <td class="p-4 text-sm font-normal text-right text-gray-500 whitespace-nowrap dark:text-gray-400">
+          <%= game_word.score %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr class="bg-gray-100 dark:bg-gray-700">
+      <td class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+        <%= t(".words_count", count: @game.game_words.count) %>
+      </td>
+      <td></td>
+      <td class="p-4 text-xs font-medium text-right text-gray-500 uppercase dark:text-gray-400">
+        <%= @game.game_words.sum(:score) %>
+      </td>
+    </tr>
+  </tfoot>
+</table>

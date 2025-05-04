@@ -7,14 +7,58 @@ RSpec.describe Game, type: :model do
     expect(build(:game)).to be_valid
   end
 
-  it "automatically generates a salt" do
-    expect(build(:game).salt).to be_present
-  end
+  describe "initialization" do
+    it "automatically generates a salt" do
+      expect(build(:game).salt).to be_present
+    end
 
-  it "never overwrites an existing salt" do
-    game = create(:game)
-    old_salt = game.salt
-    expect(Game.find(game.id).salt).to eq(old_salt)
+    it "never overwrites an existing salt" do
+      game = create(:game)
+      old_salt = game.salt
+      expect(Game.find(game.id).salt).to eq(old_salt)
+    end
+
+    it "randomizes the letters on initialize" do
+      game = Game.new
+      expect(game.letters).to be_present
+      expect(game.letters.length).to eq(Game::GRID_SIZE_SQUARED)
+    end
+
+    it "uses a weighted randomizer to randomize the letters" do
+      allow(WeightedRandomizer).to receive(:new).and_return(double(sample: [ "A" ] * 25))
+      game = Game.new
+      expect(game.letters).to eq("A" * 25)
+    end
+
+    it "does not randomize the letters if they are already set" do
+      game = Game.new(letters: "A" * 25)
+      expect(game.letters).to eq("A" * 25)
+    end
+
+    it "stores the letter scores on initialize" do
+      game = Game.new
+      expect(game.letter_scores).to eq(Game::LETTERS.map { |letter, data| [ letter, data[:value] ] }.to_h)
+    end
+
+    it "sets min_words to the default value if it is not set" do
+      game = Game.new
+      expect(game.min_words).to eq(Game::DEFAULT_MIN_WORDS)
+    end
+
+    it "does not change min_words if it is set" do
+      game = Game.new(min_words: 1)
+      expect(game.min_words).to eq(1)
+    end
+
+    it "sets max_words to the default value if it is not set" do
+      game = Game.new
+      expect(game.max_words).to eq(Game::DEFAULT_MAX_WORDS)
+    end
+
+    it "does not change max_words if it is set" do
+      game = Game.new(max_words: 1)
+      expect(game.max_words).to eq(1)
+    end
   end
 
   describe "normalizations" do
@@ -31,6 +75,22 @@ RSpec.describe Game, type: :model do
 
     it "requires all characters in letters to be any of the valid letters" do
       expect(build(:game, letters: "A" * 24 + "Ü")).to be_invalid
+    end
+
+    it "requires min_words to be set" do
+      expect(build(:game, min_words: nil)).to be_invalid
+    end
+
+    it "requires max_words to be set" do
+      expect(build(:game, max_words: nil)).to be_invalid
+    end
+
+    it "requires min_words to be greater than or equal to 1" do
+      expect(build(:game, min_words: 0)).to be_invalid
+    end
+
+    it "requires max_words to be greater than or equal to 1" do
+      expect(build(:game, max_words: 0)).to be_invalid
     end
   end
 
@@ -49,6 +109,11 @@ RSpec.describe Game, type: :model do
       it "can transition to ready" do
         game.ready!
         expect(game.current_state).to eq("ready")
+      end
+
+      it "can transition to failed" do
+        game.failed!
+        expect(game.current_state).to eq("failed")
       end
 
       it "cannot transition to started" do
@@ -74,6 +139,10 @@ RSpec.describe Game, type: :model do
 
       it "cannot transition to ended" do
         expect { game.end! }.to raise_error(Workflow::NoTransitionAllowed)
+      end
+
+      it "cannot transition to failed" do
+        expect { game.failed! }.to raise_error(Workflow::NoTransitionAllowed)
       end
 
       it "can transition to canceled" do
@@ -109,6 +178,10 @@ RSpec.describe Game, type: :model do
         expect(game.current_state).to eq("canceled")
       end
 
+      it "cannot transition to failed" do
+        expect { game.failed! }.to raise_error(Workflow::NoTransitionAllowed)
+      end
+
       context "when transitioning to the ended state" do
         let(:game) { create(:game, :started) }
 
@@ -138,6 +211,10 @@ RSpec.describe Game, type: :model do
       it "cannot transition to canceled" do
         expect { game.cancel! }.to raise_error(Workflow::NoTransitionAllowed)
       end
+
+      it "cannot transition to failed" do
+        expect { game.failed! }.to raise_error(Workflow::NoTransitionAllowed)
+      end
     end
 
     context "for a canceled game" do
@@ -150,33 +227,60 @@ RSpec.describe Game, type: :model do
       it "cannot transition to ended" do
         expect { game.end! }.to raise_error(Workflow::NoTransitionAllowed)
       end
+
+      it "cannot transition to failed" do
+        expect { game.failed! }.to raise_error(Workflow::NoTransitionAllowed)
+      end
     end
   end
 
-  describe "#randomize_letters" do
-    Game.workflow_spec.states.keys.excluding(:building).each do |state|
-      context "when the game is in the #{state} state" do
-        let(:game) { create(:game, state) }
+  describe "#destroyable?" do
+    it "returns true if the game is in the ready state" do
+      expect(create(:game, :ready).destroyable?).to be_truthy
+    end
 
-        it "raises an error" do
-          expect { game.randomize_letters }.to raise_error("Cannot randomize letters for a game that is not in the building state")
+    it "returns true if the game is in the failed state" do
+      expect(create(:game, :failed).destroyable?).to be_truthy
+    end
+
+    Game.workflow_spec.states.keys.excluding(:ready, :failed).each do |state|
+      it "returns false if the game is in the #{state} state" do
+        expect(create(:game, state).destroyable?).to be_falsey
+      end
+    end
+  end
+
+  describe "#destroy" do
+    let(:game) { create(:game, workflow_state) }
+
+    # Make sure that the game is created before we run the tests.
+    before { game }
+
+    %i[ready failed].each do |state|
+      context "when the game is in the #{state} state" do
+        let(:workflow_state) { state }
+
+        it "deletes the game" do
+          expect { game.destroy }.to change(Game, :count).by(-1)
+        end
+
+        it "returns true" do
+          expect(game.destroy).to be_truthy
         end
       end
     end
 
-    context "when the game is in the building state" do
-      let(:game) { build(:game, :building) }
+    Game.workflow_spec.states.keys.excluding(:ready, :failed).each do |state|
+      context "when the game is in the #{state} state" do
+        let(:workflow_state) { state }
 
-      it "randomizes the letters" do
-        game.randomize_letters
-        expect(game.letters).to be_present
-        expect(game.letters.length).to eq(Game::GRID_SIZE_SQUARED)
-      end
+        it "does not delete the game" do
+          expect { game.destroy }.not_to change(Game, :count)
+        end
 
-      it "uses a weighted randomizer to randomize the letters" do
-        allow(WeightedRandomizer).to receive(:new).and_return(double(sample: [ "A" ] * 25))
-        game.randomize_letters
-        expect(game.letters).to eq("A" * 25)
+        it "returns false" do
+          expect(game.destroy).to be_falsey
+        end
       end
     end
   end
