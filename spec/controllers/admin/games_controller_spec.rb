@@ -130,7 +130,8 @@ RSpec.describe Admin::GamesController, type: :controller do
   end
 
   describe "POST #create" do
-    let(:valid_params) { { game: { letters: Game::LETTERS.keys.sample(25).join, min_words: 1, max_words: 100 } } }
+    let(:letters) { Game::LETTERS.keys.sample(25).join }
+    let(:valid_params) { { game: { letters: letters, min_words: 1, max_words: 100 } } }
     let(:invalid_params) { { game: { letters: "", min_words: 0, max_words: 0 } } }
 
     context "when the current user is an admin" do
@@ -141,6 +142,11 @@ RSpec.describe Admin::GamesController, type: :controller do
           expect {
             post :create, params: valid_params
           }.to change(Game, :count).by(1)
+
+          game = Game.last
+          expect(game.letters).to eq(letters)
+          expect(game.min_words).to eq(1)
+          expect(game.max_words).to eq(100)
         end
 
         it "redirects to the created game" do

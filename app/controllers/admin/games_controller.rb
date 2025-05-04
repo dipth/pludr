@@ -33,7 +33,7 @@ class Admin::GamesController < Admin::BaseController
   private
 
   def game_params
-    params.require(:game).permit(:min_words, :max_words)
+    params.require(:game).permit(:letters, :min_words, :max_words)
   end
 
   def search_params
