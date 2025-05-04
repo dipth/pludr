@@ -1,0 +1,21 @@
+da:
+  activerecord:
+    attributes:
+      game:
+        id: "ID"
+        letters: "Bogstaver"
+        min_words: "Minimum antal ord"
+        max_words: "Maksimum antal ord"
+        game_words_count: "Antal ord"
+        workflow_state: "Status"
+        created_at: "Oprettelsesdato"
+        updated_at: "Senest opdateret"
+        started_at: "Startet"
+        ended_at: "Sluttet"
+        workflow_states:
+          building: "Under udarbejdelse"
+          ready: "Klar til start"
+          started: "Startet"
+          ended: "Afsluttet"
+          canceled: "Annulleret"
+          failed: "Fejlet"

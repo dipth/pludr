@@ -27,5 +27,9 @@ FactoryBot.define do
     trait :canceled do
       workflow_state { :canceled }
     end
+
+    trait :failed do
+      workflow_state { :failed }
+    end
   end
 end

@@ -1,0 +1,33 @@
+da:
+  admin:
+    games:
+      index:
+        title: "Spil"
+        new: "Opret spil"
+      filter:
+        title: "Filtrér"
+        created_at_gteq: "Oprettet efter"
+        created_at_lteq: "Oprettet før"
+        updated_at_gteq: "Sidst opdateret efter"
+        updated_at_lteq: "Sidst opdateret før"
+        started_at_gteq: "Startet efter"
+        started_at_lteq: "Startet før"
+        ended_at_gteq: "Sluttet efter"
+        ended_at_lteq: "Sluttet før"
+      new:
+        title: "Opret spil"
+      form:
+        min_words: "Minimum ord"
+        max_words: "Maksimum ord"
+        save: "Opret"
+      create:
+        success_notice: "Spillet blev oprettet (der kan gå et par minutter før spillet er klar)"
+      destroy:
+        success_notice: "Spillet blev slettet"
+        failure_notice: "Spillet kunne ikke slettes"
+      show:
+        delete_confirmation: "Er du sikker på, at du vil slette dette spil?"
+      info:
+        general_information: "Generel information"
+      words:
+        words_count: "%{count} ord"

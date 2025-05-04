@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_21_121630) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_04_135402) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "game_words", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.bigint "word_id", null: false
+    t.citext "value"
+    t.string "hashed_value"
+    t.integer "length"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id", "value"], name: "index_game_words_on_game_id_and_value", unique: true
+    t.index ["game_id"], name: "index_game_words_on_game_id"
+    t.index ["hashed_value"], name: "index_game_words_on_hashed_value"
+    t.index ["length"], name: "index_game_words_on_length"
+    t.index ["score"], name: "index_game_words_on_score"
+    t.index ["value"], name: "index_game_words_on_value"
+    t.index ["word_id"], name: "index_game_words_on_word_id"
+  end
 
   create_table "games", force: :cascade do |t|
     t.string "workflow_state", null: false
@@ -23,6 +41,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_21_121630) do
     t.datetime "updated_at", null: false
     t.datetime "started_at"
     t.datetime "ended_at"
+    t.jsonb "letter_scores", default: {}
+    t.integer "min_words", null: false
+    t.integer "max_words", null: false
+    t.integer "game_words_count", default: 0
     t.index ["workflow_state"], name: "index_games_on_workflow_state"
   end
 
@@ -58,5 +80,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_21_121630) do
     t.index ["value"], name: "index_words_on_value", unique: true
   end
 
+  add_foreign_key "game_words", "games", on_delete: :cascade
+  add_foreign_key "game_words", "words", on_delete: :nullify
   add_foreign_key "sessions", "users"
 end

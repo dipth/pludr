@@ -17,6 +17,9 @@ class Word < ApplicationRecord
 
   before_validation :set_letter_pairs
 
+  has_many :game_words, dependent: :nullify
+  has_many :games, through: :game_words
+
   # This method defines which attributes can be searched via Ransack.
   # @param auth_object [Object] The object that is being authorized. Currently unused.
   # @return [Array<String>] The attributes that can be searched.

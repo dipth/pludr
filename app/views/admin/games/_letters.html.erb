@@ -1,0 +1,8 @@
+<div class="grid grid-cols-5 gap-4">
+  <% @game.letters.chars.each do |letter| %>
+    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-gray-50 flex flex-col items-center justify-center p-1 rounded-md">
+      <p class="text-3xl"><%= letter %></p>
+      <p class="text-xs font-mono"><%= @game.letter_scores[letter] %></p>
+    </div>
+  <% end %>
+</div>
