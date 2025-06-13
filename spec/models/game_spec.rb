@@ -92,6 +92,11 @@ RSpec.describe Game, type: :model do
     it "requires max_words to be greater than or equal to 1" do
       expect(build(:game, max_words: 0)).to be_invalid
     end
+
+    it "does not allow multiple started games" do
+      create(:game, :started)
+      expect { create(:game, :started) }.to raise_error(ActiveRecord::RecordNotUnique)
+    end
   end
 
   describe "states" do
@@ -154,6 +159,12 @@ RSpec.describe Game, type: :model do
         it "sets the started_at attribute to the current time" do
           game.start!
           expect(game.started_at).to be_within(1.second).of(Time.current)
+        end
+
+        it "ends any existing started game" do
+          other_game = create(:game, :started)
+          game.start!
+          expect(other_game.reload.current_state).to eq("ended")
         end
       end
 

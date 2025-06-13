@@ -26,8 +26,14 @@ da:
         success_notice: "Spillet blev slettet"
         failure_notice: "Spillet kunne ikke slettes"
       show:
+        start: "Start"
+        delete: "Slet"
+        start_confirmation: "Er du sikker på, at du vil starte dette spil? Det vil slutte alle andre spil."
         delete_confirmation: "Er du sikker på, at du vil slette dette spil?"
       info:
         general_information: "Generel information"
       words:
         words_count: "%{count} ord"
+      start:
+        success_notice: "Spillet blev startet"
+        failure_notice: "Spillet kunne ikke startes"
