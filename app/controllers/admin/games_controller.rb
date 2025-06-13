@@ -30,6 +30,15 @@ class Admin::GamesController < Admin::BaseController
     end
   end
 
+  def start
+    @game = Game.find(params[:id])
+    if @game.start!
+      redirect_to admin_game_path(@game), notice: t(".success_notice")
+    else
+      redirect_to admin_game_path(@game), alert: t(".failure_notice")
+    end
+  end
+
   private
 
   def game_params

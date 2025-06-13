@@ -14,7 +14,11 @@ Rails.application.routes.draw do
         patch :restore
       end
     end
-    resources :games, except: [ :edit, :update ]
+    resources :games, except: [ :edit, :update ] do
+      member do
+        patch :start
+      end
+    end
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

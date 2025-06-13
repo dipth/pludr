@@ -5,6 +5,7 @@
 # A game consists of 25 letters, which are used to form a grid of 5x5.
 class Game < ApplicationRecord
   include WorkflowActiverecord
+  prepend TransitionTransaction
 
   # These represents the valid letters that can occur in a game:
   LETTERS = YAML.load(File.open("config/letters.yml")).deep_symbolize_keys.stringify_keys
@@ -141,5 +142,12 @@ class Game < ApplicationRecord
   # @return [void]
   def enforce_destroyable
     throw :abort unless destroyable?
+  end
+
+  # This callback is used when a ready game is started.
+  # We use this to ensure that any other running game is ended before starting this one.
+  # @return [void]
+  def start
+    Game.with_started_state.each(&:end!)
   end
 end

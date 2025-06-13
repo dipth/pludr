@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_04_135402) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_13_131003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_04_135402) do
     t.integer "max_words", null: false
     t.integer "game_words_count", default: 0
     t.index ["workflow_state"], name: "index_games_on_workflow_state"
+    t.index ["workflow_state"], name: "index_games_on_workflow_state_started", unique: true, where: "((workflow_state)::text = 'started'::text)"
   end
 
   create_table "sessions", force: :cascade do |t|

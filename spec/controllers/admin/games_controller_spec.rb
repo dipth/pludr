@@ -244,4 +244,61 @@ RSpec.describe Admin::GamesController, type: :controller do
       end
     end
   end
+
+  describe "PATCH #start" do
+    let!(:game) { create(:game) }
+
+    before { allow(Game).to receive(:find).with(game.id.to_s).and_return(game) }
+
+    context "when the current user is an admin" do
+      let(:current_user) { create(:user, admin: true) }
+
+      it "calls start on the game" do
+        expect(game).to receive(:start!)
+        patch :start, params: { id: game.id }
+      end
+
+      it "redirects to the game show page with a notice when the game is started" do
+        allow(game).to receive(:start!).and_return(true)
+        patch :start, params: { id: game.id }
+        expect(response).to redirect_to(admin_game_path(game))
+        expect(flash[:notice]).to eq(I18n.t("admin.games.start.success_notice"))
+      end
+
+      it "redirects to the game show page with an alert when the game cannot be started" do
+        allow(game).to receive(:start!).and_return(false)
+        patch :start, params: { id: game.id }
+        expect(response).to redirect_to(admin_game_path(game))
+        expect(flash[:alert]).to eq(I18n.t("admin.games.start.failure_notice"))
+      end
+    end
+
+    context "when the current user is not an admin" do
+      let(:current_user) { create(:user) }
+
+      it "redirects to the root path" do
+        patch :start, params: { id: game.id }
+        expect(response).to redirect_to(root_path)
+      end
+
+      it "does not call start on the game" do
+        expect(game).not_to receive(:start!)
+        patch :start, params: { id: game.id }
+      end
+    end
+
+    context "when the current user is not signed in" do
+      let(:current_user) { nil }
+
+      it "redirects to the sign in page" do
+        patch :start, params: { id: game.id }
+        expect(response).to redirect_to(new_session_path)
+      end
+
+      it "does not call start on the game" do
+        expect(game).not_to receive(:start!)
+        patch :start, params: { id: game.id }
+      end
+    end
+  end
 end

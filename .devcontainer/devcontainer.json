@@ -18,11 +18,13 @@
 
   "containerEnv": {
     "KAMAL_REGISTRY_PASSWORD": "$KAMAL_REGISTRY_PASSWORD",
-    "DB_HOST": "postgres"
+    "DB_HOST": "postgres",
+    "MAILPIT_HOST": "mailpit"
   },
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [3000, 5432],
+  "appPort": [8025],
 
   // Configure tool-specific properties.
   // "customizations": {},

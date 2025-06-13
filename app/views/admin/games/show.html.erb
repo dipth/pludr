@@ -1,5 +1,10 @@
 <%
   actions = []
+
+  if @game.ready?
+    actions << { title: t(".start"), url: start_admin_game_path(@game), method: :patch, data: { turbo_method: :patch, turbo_confirm: t(".start_confirmation") } }
+  end
+
   if @game.destroyable?
     actions << { title: t(".delete"), url: admin_game_path(@game), method: :delete, data: { turbo_method: :delete, turbo_confirm: t(".delete_confirmation") } }
   end
