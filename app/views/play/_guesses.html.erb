@@ -1,0 +1,11 @@
+<div class="w-96">
+  <h2 class="text-lg font-bold">Guesses</h2>
+  <turbo-frame id="guesses">
+    <% @guesses.each do |guess| %>
+      <div class="flex items-center justify-between border-b border-gray-200 py-1">
+        <div><%= guess.game_word.value %></div>
+        <div><%= guess.game_word.score %></div>
+      </div>
+    <% end %>
+  </turbo-frame>
+</div>

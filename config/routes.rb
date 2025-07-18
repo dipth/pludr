@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   resources :users, only: [ :new, :create ]
   resource :account, only: [ :edit, :update ]
+  get "play" => "play#show", as: :play
+  resources :guesses, only: [ :create ]
 
   namespace :admin do
     root "dashboards#index"
