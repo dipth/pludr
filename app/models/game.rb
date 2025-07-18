@@ -36,6 +36,7 @@ class Game < ApplicationRecord
 
   has_many :game_words, dependent: :destroy
   has_many :words, through: :game_words
+  has_many :guesses, through: :game_words
 
   # This method defines which attributes can be searched via Ransack.
   # @param auth_object [Object] The object that is being authorized. Currently unused.

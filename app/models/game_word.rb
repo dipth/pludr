@@ -4,6 +4,7 @@
 class GameWord < ApplicationRecord
   belongs_to :game, counter_cache: true
   belongs_to :word
+  has_many :guesses, dependent: :destroy
 
   validates :game, presence: true
   validates :word, presence: true

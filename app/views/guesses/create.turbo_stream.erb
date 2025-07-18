@@ -1,0 +1,2 @@
+<%= turbo_stream.replace "guesses", partial: "guesses", locals: { guesses: @guesses, highlighted_guess: @guess } %>
+<%= turbo_stream.replace "guess_feedback", partial: "feedback", locals: { guess: @guess } %>
