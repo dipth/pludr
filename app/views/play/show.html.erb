@@ -1,0 +1,8 @@
+<h1 class="text-2xl"><%= t(".title") %></h1>
+<hr class="my-4 border-gray-200">
+
+<div class="flex flex-wrap gap-4">
+  <%= render "play/game_board" %>
+  <%= render "guesses/guesses", guesses: @guesses, highlighted_guess: @guess %>
+  <%= render "play/chat" %>
+</div>

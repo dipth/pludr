@@ -36,6 +36,16 @@ RSpec.describe User, type: :model do
     it { should_not allow_value("short").for(:password) } # too short
   end
 
+  describe "associations" do
+    it "has many sessions" do
+      expect(build(:user).sessions).to be_a(ActiveRecord::Relation)
+    end
+
+    it "has many guesses" do
+      expect(build(:user).guesses).to be_a(ActiveRecord::Relation)
+    end
+  end
+
   describe "#legacy_authenticate_by" do
     let(:email_address) { "user@example.com" }
     let(:password) { "qwerty42" }

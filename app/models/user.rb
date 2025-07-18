@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_secure_password
   has_many :sessions, dependent: :destroy
+  has_many :guesses, dependent: :destroy
 
   # Normalize the email address to lowercase and strip whitespace.
   # This is techincally not necessary because we're using citext, but it makes lists of users more readable.

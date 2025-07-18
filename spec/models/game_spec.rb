@@ -99,6 +99,20 @@ RSpec.describe Game, type: :model do
     end
   end
 
+  describe "associations" do
+    it "has many game_words" do
+      expect(build(:game).game_words).to be_a(ActiveRecord::Relation)
+    end
+
+    it "has many words through game_words" do
+      expect(build(:game).words).to be_a(ActiveRecord::Relation)
+    end
+
+    it "has many guesses through game_words" do
+      expect(build(:game).guesses).to be_a(ActiveRecord::Relation)
+    end
+  end
+
   describe "states" do
     context "for a new game" do
       let(:game) { build(:game) }
@@ -242,6 +256,21 @@ RSpec.describe Game, type: :model do
       it "cannot transition to failed" do
         expect { game.failed! }.to raise_error(Workflow::NoTransitionAllowed)
       end
+    end
+  end
+
+  describe "#current" do
+    it "returns the currently active game" do
+      game = create(:game, :started)
+      expect(Game.current).to eq(game)
+    end
+
+    it "returns nil if there is no currently active game" do
+      Game.workflow_spec.states.keys.excluding(:started).each do |state|
+        create(:game, state)
+      end
+
+      expect(Game.current).to be_nil
     end
   end
 

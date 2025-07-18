@@ -1,0 +1,8 @@
+<%= turbo_stream.replace "guesses", partial: "guesses", locals: { guesses: @guesses, highlighted_guess: @guess } %>
+<%= turbo_stream.replace "guess_feedback", partial: "feedback" %>
+<%
+  # We need to delete the flash values after we have rendered the guess_feedback partial as Turbo responses
+  # do not do this implicitly, meaning that users would see the feedback messsage again next time they load the page.
+  flash.delete(:feedback_type)
+  flash.delete(:feedback_message)
+%>

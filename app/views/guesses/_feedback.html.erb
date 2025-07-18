@@ -1,0 +1,15 @@
+<%= turbo_frame_tag "guess_feedback", data: { game_target: "feedback" } do %>
+  <% if flash[:feedback_type] == "correct" %>
+    <p class="text-green-500">
+      <%= flash[:feedback_message] %>
+    </p>
+  <% elsif flash[:feedback_type] == "duplicate" %>
+    <p class="text-brand animate-shake">
+      <%= flash[:feedback_message] %>
+    </p>
+  <% elsif flash[:feedback_type] == "incorrect" %>
+    <p class="text-brand animate-shake">
+      <%= flash[:feedback_message] %>
+    </p>
+  <% end %>
+<% end %>

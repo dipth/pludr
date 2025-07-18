@@ -36,6 +36,7 @@ class Game < ApplicationRecord
 
   has_many :game_words, dependent: :destroy
   has_many :words, through: :game_words
+  has_many :guesses, through: :game_words
 
   # This method defines which attributes can be searched via Ransack.
   # @param auth_object [Object] The object that is being authorized. Currently unused.
@@ -49,6 +50,12 @@ class Game < ApplicationRecord
   # @return [Array<String>] The attributes that can be sorted.
   def self.ransortable_attributes(_auth_object = nil)
     %w[id letters game_words_count workflow_state created_at updated_at started_at ended_at]
+  end
+
+  # This method returns the currently active game.
+  # @return [Game] The currently active game.
+  def self.current
+    with_started_state.first
   end
 
   workflow do
