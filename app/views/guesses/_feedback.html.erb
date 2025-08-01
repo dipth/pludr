@@ -1,0 +1,17 @@
+<%# locals: (guess: Guess.new) %>
+
+<%= turbo_frame_tag "guess_feedback", data: { game_target: "feedback" } do %>
+  <% if guess.persisted? && guess.previously_new_record? %>
+    <p class="text-green-500">
+      <%= t(".correct", word: guess.game_word.value, score: guess.game_word.score) %>
+    </p>
+  <% elsif guess.persisted? && !guess.previously_new_record? %>
+    <p class="text-brand animate-shake">
+      <%= t(".duplicate", word: guess.game_word.value) %>
+    </p>
+  <% elsif guess.invalid? && params[:guess].present? %>
+    <p class="text-brand animate-shake">
+      <%= t(".incorrect", word: params[:guess].upcase) %>
+    </p>
+  <% end %>
+<% end %>
