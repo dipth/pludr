@@ -49,3 +49,7 @@ def wait_for_turbo_frame(selector = 'turbo-frame', timeout = nil)
     has_no_selector?("#{selector}[busy]", wait: timeout.presence || 5.seconds)
   end
 end
+
+def expect_native_validation_error(selector, message)
+  expect(page.find(selector).native.attribute("validationMessage")).to eq message
+end
