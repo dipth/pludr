@@ -6,3 +6,6 @@ da:
       correct: "Du har gættet ordet %{word} (%{score} point)"
       incorrect: "Ordet %{word} findes ikke i dagens spil"
       duplicate: "Du har allerede gættet ordet %{word}"
+    form:
+      guess: "Gæt"
+      reset: "Nulstil"

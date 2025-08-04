@@ -45,5 +45,15 @@ services:
     - 1025:1025
     - 8025:8025
 
+  chrome:
+    image: seleniarm/standalone-chromium:latest
+    restart: unless-stopped
+    networks:
+    - default
+    ports:
+    - 4444:4444
+    - 7900:7900
+    - 5900:5900
+
 volumes:
   postgres-data:

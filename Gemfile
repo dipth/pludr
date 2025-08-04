@@ -92,6 +92,9 @@ group :development, :test do
   # Use Capybara for testing [https://github.com/teamcapybara/capybara]
   gem "capybara"
 
+  # Use selenium-webdriver for feature tests [https://github.com/SeleniumHQ/selenium/tree/trunk/rb]
+  gem "selenium-webdriver"
+
   # Use rails-controller-testing for testing controllers [https://github.com/rails/rails-controller-testing]
   gem "rails-controller-testing"
 end
