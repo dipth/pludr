@@ -2,12 +2,19 @@
 
 <%= turbo_frame_tag "guesses" do %>
   <div class="w-96">
-    <h2 class="text-lg font-bold"><%= t(".title") %></h2>
+    <h2 class="text-lg font-bold flex items-center justify-between">
+      <%= t(".title") %>
+      <span class="text-sm text-gray-500"><%= guesses.count %> / <%= @game.game_words_count %></span>
+    </h2>
     <% guesses.each do |guess| %>
       <div class="flex items-center justify-between border-b border-gray-200 py-1 aria-selected:bg-green-200 aria-selected:animate-fade-in-bg" aria-selected="<%= highlighted_guess == guess %>">
         <div class="px-2 guess-value"><%= guess.game_word.value %></div>
         <div class="px-2"><%= guess.game_word.score %></div>
       </div>
     <% end %>
+    <div class="flex items-center justify-between border-b border-gray-200 py-1 aria-selected:bg-green-200">
+      <div class="px-2 text-sm text-gray-500">Total antal point</div>
+      <div class="px-2 text-sm text-gray-500"><%= guesses.sum(&:score) %></div>
+    </div>
   </div>
 <% end %>
