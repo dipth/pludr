@@ -1,8 +1,8 @@
-<div class="w-96" data-controller="game" data-game-word-hashes-value="<%= @game.game_words.map(&:hashed_value).to_json %>" data-game-salt-value="<%= @game.salt %>" data-game-incorrect-message-value="<%= t('guesses.feedback.incorrect') %>" data-game-duplicate-message-value="<%= t('guesses.feedback.duplicate') %>">
+<div data-controller="game" data-game-word-hashes-value="<%= @game.game_words.map(&:hashed_value).to_json %>" data-game-salt-value="<%= @game.salt %>" data-game-incorrect-message-value="<%= t('guesses.feedback.incorrect') %>" data-game-duplicate-message-value="<%= t('guesses.feedback.duplicate') %>">
   <div class="grid grid-cols-5 gap-4 mb-4" data-controller="game-board" data-action="game:reset@window->game-board#resetAllTiles">
     <% @game_board.board_tiles.each_with_index do |row, row_index| %>
       <% row.each_with_index do |tile, column_index| %>
-        <div class="select-none bg-white border border-gray-200 text-gray-900 flex flex-col items-center justify-center p-1 rounded-md cursor-pointer aria-selected:bg-brand aria-selected:text-white aria-selected:border-brand aria-disabled:opacity-25 aria-disabled:cursor-not-allowed" data-action="click->game-board#toggleTile" data-letter="<%= tile.letter %>" data-value="<%= tile.value %>" data-row="<%= row_index %>" data-column="<%= column_index %>">
+        <div class="aspect-square select-none bg-white border border-gray-200 text-gray-900 flex flex-col items-center justify-center p-1 rounded-md cursor-pointer aria-selected:bg-brand aria-selected:text-white aria-selected:border-brand aria-disabled:opacity-25 aria-disabled:cursor-not-allowed" data-action="click->game-board#toggleTile" data-letter="<%= tile.letter %>" data-value="<%= tile.value %>" data-row="<%= row_index %>" data-column="<%= column_index %>">
           <p class="text-3xl"><%= tile.letter %></p>
           <p class="text-xs font-mono"><%= tile.value %></p>
         </div>
