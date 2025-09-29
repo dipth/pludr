@@ -5,7 +5,7 @@
   <div class="w-full sm:w-96">
     <%= render "play/game_board" %>
   </div>
-  <div class="w-full sm:flex-1">
+  <div class="w-full sm:flex-1" data-controller="guesses">
     <%= render "guesses/guesses", guesses: @guesses, highlighted_guess: @guess %>
   </div>
 </div>

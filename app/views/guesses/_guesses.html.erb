@@ -6,9 +6,12 @@
       <%= t(".title") %>
       <span class="text-sm text-gray-500"><%= guesses.count %> / <%= @game.game_words_count %></span>
     </h2>
-    <div class="max-h-90 overflow-auto inset-shadow-sm">
+    <div class="max-h-90 overflow-auto inset-shadow-sm" id="guesses-container">
       <% guesses.each do |guess| %>
-        <div class="flex items-center justify-between border-b border-gray-200 py-1 aria-selected:bg-green-200 aria-selected:animate-fade-in-bg" aria-selected="<%= highlighted_guess == guess %>">
+        <div class="flex items-center justify-between border-b border-gray-200 py-1 aria-selected:bg-green-200 aria-selected:animate-fade-in-bg"
+             aria-selected="<%= highlighted_guess == guess %>"
+             id="guess-<%= guess.id %>"
+             data-guess-id="<%= guess.id %>">
           <div class="px-3 guess-value"><%= guess.game_word.value %></div>
           <div class="px-3"><%= guess.game_word.score %></div>
         </div>
