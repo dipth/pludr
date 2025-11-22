@@ -1,6 +1,6 @@
 Capybara.server_host = '0.0.0.0'
 Capybara.server_port = 3010
-Capybara.app_host = ENV['CI'] == 'true' ? 'http://localhost:3010' : 'http://rails-app:3010'
+Capybara.app_host = 'http://localhost:3010'
 
 # Add a configuration to connect to Chrome remotely through Selenium Grid
 Capybara.register_driver :remote_selenium do |app|
@@ -15,25 +15,14 @@ Capybara.register_driver :remote_selenium do |app|
   options.add_argument("--disable-features=BlockInsecurePrivateNetworkRequests")
 
   # Set the secure origin based on environment
-  secure_origin = ENV['CI'] == 'true' ? 'http://localhost:3010' : 'http://rails-app:3010'
+  secure_origin = 'http://localhost:3010'
   options.add_argument("--unsafely-treat-insecure-origin-as-secure=#{secure_origin}")
 
-  if ENV['CI'] == 'true'
-    # Use local Chrome in CI
-    Capybara::Selenium::Driver.new(
-      app,
-      browser: :chrome,
-      options: options,
-    )
-  else
-    # Use remote Chrome when running locally in devcontainer
-    Capybara::Selenium::Driver.new(
-      app,
-      browser: :remote,
-      url: "http://chrome:4444/wd/hub",
-      options: options,
-    )
-  end
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :chrome,
+    options: options,
+  )
 end
 
 # set the capybara driver configs

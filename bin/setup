@@ -12,6 +12,15 @@ FileUtils.chdir APP_ROOT do
   # This script is idempotent, so that you can run it at any time and get an expectable outcome.
   # Add necessary setup steps to this file.
 
+  puts "== Setting up PostgreSQL =="
+  puts "  Stopping existing PostgreSQL containers..."
+  `docker ps -a --format "{{.Names}}"`.split("\n").select { |n| n.start_with?("postgres") }.each do |container|
+    system("docker stop #{container}")
+  end
+  puts "  Starting PostgreSQL 18 container..."
+  system("docker start postgres-18") || system!("docker run --name postgres-18 -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:18")
+  puts "  Waiting for PostgreSQL 18 container to be ready..."
+  system!("until docker exec postgres-18 pg_isready -U postgres; do sleep 1; done")
   puts "== Installing dependencies =="
   system("bundle check") || system!("bundle install")
 
