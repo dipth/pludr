@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant aria-invalid (&[aria-invalid="true"]);
 
 @theme {
   --color-brand: #d81b21;
+  --color-brand-dark: #c0181e;
   --color-primary-50: var(--color-blue-50);
   --color-primary-100: var(--color-blue-100);
   --color-primary-200: var(--color-blue-200);
@@ -15,6 +17,30 @@
   --color-primary-800: var(--color-blue-800);
   --color-primary-900: var(--color-blue-900);
   --color-primary-950: var(--color-blue-950);
+
+  --animate-shake: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  --animate-fade-in-bg: fade-in-bg 0.5s ease-in-out;
+
+  @keyframes shake {
+    0%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+
+  @keyframes fade-in-bg {
+    from {
+      background-color: transparent;
+    }
+  }
 }
 
 /* Pagination */

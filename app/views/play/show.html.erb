@@ -1,0 +1,15 @@
+<h1 class="text-2xl"><%= t(".title") %></h1>
+<hr class="my-4 border-gray-200">
+
+<div class="flex flex-wrap gap-4 mb-4">
+  <div class="w-full sm:w-96">
+    <%= render "play/game_board" %>
+  </div>
+  <div class="w-full sm:flex-1" data-controller="guesses">
+    <%= render "guesses/guesses", guesses: @guesses, highlighted_guess: @guess %>
+  </div>
+</div>
+
+<div>
+  <%= render "play/chat" %>
+</div>

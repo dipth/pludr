@@ -34,6 +34,20 @@ RSpec.describe GameWord, type: :model do
     end
   end
 
+  describe "associations" do
+    it "belongs to a game" do
+      expect(build(:game_word).game).to be_a(Game)
+    end
+
+    it "belongs to a word" do
+      expect(build(:game_word).word).to be_a(Word)
+    end
+
+    it "has many guesses" do
+      expect(build(:game_word).guesses).to be_a(ActiveRecord::Relation)
+    end
+  end
+
   it "sets the value from the associated word" do
     word = create(:word, value: "TEST")
     game_word = create(:game_word, word: word)

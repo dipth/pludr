@@ -11,6 +11,32 @@ RSpec.describe GameBoard, type: :model do
   let(:game) { build(:game, letters: "ABCDEFGHIJKLMNOPQRSTUVWXA") }
   let(:game_board) { GameBoard.new(game) }
 
+  describe "#game" do
+    it "returns the game" do
+      expect(game_board.game).to eq(game)
+    end
+  end
+
+  describe "#all_tiles" do
+    it "returns an array of GameTile objects that represent all tiles matching the game's letters" do
+      game_board.all_tiles.each_with_index do |tile, index|
+        expect(tile).to be_a(GameTile)
+        expect(tile.letter).to eq(game.letters[index])
+      end
+    end
+  end
+
+  describe "#board_tiles" do
+    it "returns a grouped array of GameTile objects that represent the board tiles" do
+      game_board.board_tiles.each_with_index do |row, row_index|
+        row.each_with_index do |tile, column_index|
+          expect(tile).to be_a(GameTile)
+          expect(tile.letter).to eq(game.letters[row_index * Game::GRID_SIZE + column_index])
+        end
+      end
+    end
+  end
+
   describe "#check_word" do
     it "is able to find a word across a single row" do
       word = "ABCDE"

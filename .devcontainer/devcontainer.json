@@ -23,8 +23,8 @@
   },
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [3000, 5432],
-  "appPort": [8025],
+  "forwardPorts": [3000],
+  "appPort": [8025, 5432],
 
   // Configure tool-specific properties.
   // "customizations": {},

@@ -13,9 +13,9 @@ module SessionHelpers
 
       # If the current test is a feature spec, set the cookie on the page
       if self.class.metadata[:type] == :feature
-        page.driver.browser.set_cookie(
-          "session_id=#{cookie_jar[:session_id]}; path=/; HttpOnly"
-        )
+        # We must visit a page before we can set a cookie:
+        visit '/'
+        page.driver.browser.manage.add_cookie(name: "session_id", value: cookie_jar[:session_id])
       end
 
       # If the current test is a controller spec, set the cookie on the request
@@ -32,7 +32,7 @@ module SessionHelpers
 
     # If the current test is a feature spec, clear the cookie on the page
     if self.class.metadata[:type] == :feature
-      page.driver.browser.clear_cookies
+      page.driver.browser.manage.delete_all_cookies
     end
 
     # If the current test is a controller spec, clear the cookie on the request

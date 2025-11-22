@@ -7,6 +7,8 @@ class GameBoard
     [ -1, -1 ], [ -1, 0 ], [ -1, 1 ], [ 0, -1 ], [ 0, 1 ], [ 1, -1 ], [ 1, 0 ], [ 1, 1 ]
   ].freeze
 
+  attr_reader :game, :all_tiles, :board_tiles
+
   # Initialize the game board
   # @param game [Game] The game instance for which the board is being initialized
   # @return [GameBoard] The initialized game board

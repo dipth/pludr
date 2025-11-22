@@ -1,0 +1,7 @@
+<%= form_with url: guesses_path, method: :post, data: { turbo_frame: "guesses" }, html: { class: "flex" } do |f| %>
+  <%= f.text_field :guess, class: "w-full border border-gray-200 rounded-md p-2 mr-2 focus:border-sky-500 outline-offset-0 focus:outline focus:invalid:border-brand focus:aria-invalid:outline-brand aria-invalid:border-brand", data: { game_target: "guessInput", action: "keydown.enter->game#makeGuess" } %>
+  <%= f.submit t(".guess"), id: "submit_guess", class: "bg-brand text-white px-4 py-2 rounded-md mr-2 cursor-pointer hover:bg-brand-dark", data: { action: "click->game#makeGuess" } %>
+  <button class="border border-gray-200 text-gray-900 px-4 py-2 rounded-md cursor-pointer hover:bg-gray-100" type="reset" data-action="click->game#reset"><%= t(".reset") %></button>
+<% end %>
+
+<%= render "guesses/feedback" %>

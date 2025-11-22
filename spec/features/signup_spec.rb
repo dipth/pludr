@@ -31,7 +31,7 @@ RSpec.describe "Signup", type: :feature do
     fill_in I18n.t("activerecord.attributes.user.password"), with: password
     fill_in I18n.t("activerecord.attributes.user.password_confirmation"), with: password
     click_button I18n.t("users.new.create_account")
-    expect(page).to have_text(I18n.t("errors.messages.blank", attribute: User.human_attribute_name(:username)))
+    expect_native_validation_error("#user_username", "Please fill out this field.")
   end
 
   it "shows an error when the name is blank" do
@@ -41,7 +41,7 @@ RSpec.describe "Signup", type: :feature do
     fill_in I18n.t("activerecord.attributes.user.password"), with: password
     fill_in I18n.t("activerecord.attributes.user.password_confirmation"), with: password
     click_button I18n.t("users.new.create_account")
-    expect(page).to have_text(I18n.t("errors.messages.blank", attribute: User.human_attribute_name(:name)))
+    expect_native_validation_error("#user_name", "Please fill out this field.")
   end
 
   it "shows an error when the email address is blank" do
@@ -51,7 +51,7 @@ RSpec.describe "Signup", type: :feature do
     fill_in I18n.t("activerecord.attributes.user.password"), with: password
     fill_in I18n.t("activerecord.attributes.user.password_confirmation"), with: password
     click_button I18n.t("users.new.create_account")
-    expect(page).to have_text(I18n.t("errors.messages.blank", attribute: User.human_attribute_name(:email_address)))
+    expect_native_validation_error("#user_email_address", "Please fill out this field.")
   end
 
   it "shows an error when the password is blank" do
@@ -60,7 +60,7 @@ RSpec.describe "Signup", type: :feature do
     fill_in I18n.t("activerecord.attributes.user.name"), with: name
     fill_in I18n.t("activerecord.attributes.user.email_address"), with: email_address
     click_button I18n.t("users.new.create_account")
-    expect(page).to have_text(I18n.t("errors.messages.blank", attribute: User.human_attribute_name(:password)))
+    expect_native_validation_error("#user_password", "Please fill out this field.")
   end
 
   it "shows an error when the password confirmation does not match the password" do

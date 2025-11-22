@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_13_131003) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_18_114945) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -49,6 +49,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_13_131003) do
     t.index ["workflow_state"], name: "index_games_on_workflow_state_started", unique: true, where: "((workflow_state)::text = 'started'::text)"
   end
 
+  create_table "guesses", force: :cascade do |t|
+    t.bigint "game_word_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_word_id"], name: "index_guesses_on_game_word_id"
+    t.index ["user_id", "game_word_id"], name: "index_guesses_on_user_id_and_game_word_id", unique: true
+    t.index ["user_id"], name: "index_guesses_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "ip_address"
@@ -83,5 +93,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_13_131003) do
 
   add_foreign_key "game_words", "games", on_delete: :cascade
   add_foreign_key "game_words", "words", on_delete: :nullify
+  add_foreign_key "guesses", "game_words", on_delete: :cascade
+  add_foreign_key "guesses", "users", on_delete: :cascade
   add_foreign_key "sessions", "users"
 end

@@ -22,7 +22,7 @@ RSpec.describe "Reset password", type: :feature, perform_enqueued_jobs: true do
     email = ActionMailer::Base.deliveries.last
     html_part = email.parts.find { |p| p.content_type.match(/text\/html/) }.body.raw_source
     doc = Nokogiri::HTML(html_part)
-    reset_password_link = doc.at_css('a')['href']
+    reset_password_link = doc.at_css('a')['href'].gsub("http://www.example.com", Capybara.app_host)
 
     visit reset_password_link
 
