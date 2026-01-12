@@ -49,7 +49,7 @@ gem "inline_svg"
 gem "postmark-rails"
 
 # Use rails-i18n for internationalization [https://github.com/svenfuchs/rails-i18n]
-gem "rails-i18n", "~> 8.0.0"
+gem "rails-i18n", "~> 8.1.0"
 
 # Render icons using rails_icons [https://github.com/Rails-Designer/rails_icons]
 gem "rails_icons"
